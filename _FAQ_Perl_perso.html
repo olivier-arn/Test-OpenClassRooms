@@ -1,0 +1,2214 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
+
+<head>
+	<title> FAQ Perl O@R </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<!-- <meta charset="utf-8" /> -->
+	<!-- <link rel="stylesheet" href="_FAQ_Perl_perso_style.css" /> -->
+	<style>
+		h1
+		{
+			color: #CC0000;
+			text-align: center;
+			/* text-decoration: underline; */
+		}
+
+		h2
+		{
+			color: #3300FF;
+			font-weight: bold;
+			font-style: italic;
+			font-size: 2.0em;
+			/* text-decoration: blink;	ne fonctionne pas */
+			/* text-decoration: line-through;	 ne peut être combiné avec overline */ 
+			/*text-decoration: overline;*/
+		}
+
+		h3,.nom_chapitre
+		{
+			font-weight: bold;
+			font-size: 1.5em;
+			text-decoration: underline;
+		}
+
+		.haut_de_page
+		{
+			text-align: right-side;	/* ne fonctionne pas */
+		}
+
+		h4
+		{
+			font-weight: bold;
+			font-size: 1.0em;
+		}
+
+		.nom_fonction
+		{
+			font-weight: bold;
+			font-size: 1.1em;
+		}
+
+		.titre_nx
+		{
+			color: #3300FF;
+			font-weight: bold;
+			font-size: 1.5em;
+		}
+
+
+		<!-- /* REGEX REPLACE
+		<font color="#FF9900">(.*?)</font>
+		<span class="variable">$1</span>
+		*/ -->
+
+		.variable
+		{
+			color: #FF9900;
+		}
+
+		.fonction
+		{
+			color: #0000FF;
+		}
+
+		.tableau
+		{
+			color: #FF33FF;
+		}
+
+		.chiffre
+		{
+			color: #FF3300;
+		}
+
+		.commentaire
+		{
+			color: #009900;
+			font-style: italic;
+		}
+
+		.texte
+		{
+			color: #999999;
+		}
+
+		.haut_de_page
+		{
+
+		}
+		
+		/* Styles spécifiques aux lignes de cmd Hachage détaillé */
+		.programlisting
+		{
+			color: #AC65A0;
+			font-style: italic;
+		}
+		/* Styles spécifiques aux blocs masquées */
+		details {
+			display:block; /* Pour les navigateurs n'implémentant pas <details> et <summary> */
+			width:300px;
+			margin:10px 0;
+		}
+		summary {
+			display:block; /* Pour les navigateurs n'implémentant pas <details> et <summary> */
+			background:#99B92C;
+			color:white;
+				border-radius:5px;
+			padding:5px;
+			cursor:pointer;font-weight:bold;
+		}
+
+		/* Styles pour remplacer l'icône par défaut */
+		summary::-webkit-details-marker {
+			display: none
+		}
+
+		summary:after {
+			content: "+";
+			color: #fff;
+			float: left;
+			font-size: 1.5em;
+			font-weight: bold;
+			margin: -5px 5px 0 0;
+			padding: 0;
+			text-align: center;
+			width: 20px;
+		}
+
+		details[open] summary:after {
+			content: "-";
+		}
+	</style>
+</head>
+
+<!--
+  CODES COULEURS UTILISEES
+orange = <font color="#FF9900">
+bleu = <font color="#0000FF">
+vert = <font color="#009900">
+gris = <font color="#999999">
+rose = <font color="#FF33FF">
+rouge = <font color="#FF3300">
+
+  CORRESP. TAILLES
+h1 = 
+h2 = 
+h3 = size 4
+h4 = size 3
+h5 = 
+-->
+
+<h3 id="Haut de page"> </h3>
+<body>   <!-- <body bgcolor="#FFFFF0"> -->
+<pre>
+<font face="Comic Sans MS">    <!-- Rappel : la balise <pre> sert à tenir compte des espaces, tabulations, retour à la ligne -->
+<h1> >> <u>FAQ des fonctions PERL récurrentes</u> << </h1>
+PERL : Practical Extraction and Report Language
+Une de ses devises est « There Is More Than One Way To Do It (TIMTOWTDI) » qui pourrait se traduire par « Il y a plus d'une façon de le faire ».
+<h2>Fonctions</h2>		<!--  <span class="titre_nx">Fonctions</span> -->
+	<a href="#Données scalaires">Données scalaires</a>
+	    My
+	    Fonction defined
+	    Répétition et concaténation
+	    Auto-in(dé)crémentation
+	    chop et chomp
+	    pack et unpack
+	</details>
+	<a href="#Tableaux et listes">Tableaux et listes</a>
+	    Assignations
+	    Accès à un élément de tableau
+	    Fonctions
+	        push et pop
+	        shift et unshift
+	        sort / reverse / chomp
+	        map
+	<a href="#Structures de controle">Structures de controle</a>
+	    Instructions
+	        if/unless
+	        while/until
+	        do { } while/until
+	        for
+	        foreach
+	    Sortie de boucle
+	        redo
+	        next (saut inconditionnel)
+	        last (arrêt inconditionnel)
+	        goto
+	<a href="#Hachages">Hachages</a>
+		Le hash ne contient qu'un tableau
+		Le hash contient un tableau de tableaux
+	<a href="#E/S de base">E/S de base</a>
+	<a href="#Opérateurs">Opérateurs</a>
+	    Assignation
+	    Incrémentation
+	    Comparaison
+	    Opérateurs logiques
+	<a href="#Expressions régulières">Expressions régulières</a>
+	    Métacaractères
+	    Quantificateurs
+	    Métasymboles
+	<a href="#Recherche et modifications de motifs">Recherche et modifications de motifs</a>
+	    Recherche
+	    Substitutions par sed
+	    Coupure par split
+	    Concaténation par join
+	<a href="#Diverses">Diverses</a>
+
+
+
+<h2>Syntaxes blocs</h2>
+	<a href="#Création fichier de sortie">Création fichier de sortie</a>
+	<a href="#Définition du format de sortie">Définition du format de sortie</a>
+	<a href="#Créer un fichier temporaire proprement">Créer un fichier temporaire proprement</a>
+	<a href="#Lire la première ligne d'un fichier">Rangement de fichier dans un tableau</a>
+	<a href="#Rangement de fichier dans un tableau">Rangement de fichier dans un tableau</a>
+	<a href="#Extraction de données du tableau">Extraction de données du tableau</a>
+	<a href="#Extraction de données du tableau">Test existence valeur dans tableau/liste</a>
+	<a href="#Suppression des doublons d'un tableau">Suppression des doublons d'un tableau</a>
+	<a href="#Utiliser des noms de fichiers ou répertoires portables">Utiliser des noms de fichiers ou répertoires portables</a>
+	<a href="#Utiliser des variables d'environnement DOS">Utiliser des variables d'environnement DOS</a>
+	<a href="#Forcer dates d'un fichier">Forcer dates d'un fichier</a>
+	<a href="#Requête en base Oracle">Requête en base Oracle</a>
+	<a href="#Envoi de mail">Envoi de mail</a>
+
+ 
+_____________________________________________________________________________________________________________________________________________________________________________________
+_____________________________________________________________________________________________________________________________________________________________________________________
+
+<h2>Fonctions</h2>
+<span class="nom_chapitre" id="Données scalaires">Données scalaires</span>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>		 <!-- Comment ajuster 1 texte a gauche et 1 a droite d'une page sur la meme ligne -->
+
+	<span class="nom_fonction">> My <</span>
+	le <span class="fonction">my</span> signifie que la variable est locale. Sa valeur n'est valable QUE dans la boucle ou sous-programme actuel.
+
+	exemple :
+		<span class="variable">$i</span>=<span class="chiffre">6</span>;
+		<span class="fonction">if</span> (condition) {
+			<span class="fonction">my</span> <span class="variable">$i</span>=<span class="chiffre">15</span>;	<span class="commentaire"># ici $i vaut 15</span>
+		}		<span class="commentaire"># ici $i reprend sa valeur 6</span>
+
+
+	<span class="nom_fonction">> defined <</span>
+	La fonction <span class="fonction">defined</span> permet de vérifier qu'une variable est définie. On dit qu'une variable est définie si une valeur lui a été affectée.
+	Si ce n'est pas le cas, on dit que la variable n'est pas définie, et on symbolise sa valeur par la valeur spéciale undef.
+ 
+	<span class="fonction">my</span> <span class="variable">$error</span> = <span class="texte">"\$var n'est pas définie.\n"</span>;
+ 
+	<span class="fonction">my</span> <span class="variable">$var</span>;	   	 <span class="commentaire"># $var est déclarée, mais elle n'est pas définie</span>
+	<span class="fonction">defined</span> <span class="variable">$var</span> && <span class="fonction">print</span> <span class="texte">"\$var = $var\n"</span> or <span class="fonction">print</span> <span class="variable">$error</span>;	<span class="commentaire"># renvoie:   "$var n'est pas définie."</span>
+ 
+	<span class="variable">$var</span> = <span class="chiffre">42</span>;		<span class="commentaire"># $var est maintenant définie</span>
+	<span class="fonction">defined</span> <span class="variable">$var</span> && <span class="fonction">print</span> <span class="texte">"\$var = $var\n"</span> or <span class="fonction">print</span> <span class="variable">$error</span>;	<span class="commentaire"># renvoie:   "$var = 42"</span>
+ 
+	<span class="variable">$var</span> = undef; 	<span class="commentaire"># $var n'est maintenant plus définie</span>
+	<span class="fonction">defined</span> <span class="variable">$var</span> && <span class="fonction">print</span> <span class="texte">"\$var = $var\n"</span> or <span class="fonction">print</span> <span class="variable">$error</span>;	<span class="commentaire"># renvoie:   "$var n'est pas définie."</span>
+
+
+	<span class="nom_fonction">> Répétition et concaténation <</span>
+
+	<span class="fonction">print</span> "bla" x <span class="chiffre">10</span>; 		<span class="commentaire"># renvoie "blablablablablablablablablabla"</span>
+	<span class="fonction">my</span> <span class="variable">$chaine</span> = 'cool' . 'ympique'; 		<span class="commentaire"># renvoie "coolympique"</span>
+	<span class="variable">$fic</span> = <span class="texte">"nom_de_fichier"</span>;
+	<span class="variable">$fic_out</span> = <span class="variable">$fic</span>.<span class="texte">"__new.log"</span>;	<span class="commentaire"># prend la valeur nom_de_fichier__new.log</span>
+	<span class="variable">$fic_out</span> = <span class="texte">"${fic}__new.log"</span>;	<span class="commentaire"># idem</span>
+	<span class="fonction">print</span> 'tro' . 'lo' x <span class="chiffre">4</span>; 		<span class="commentaire"># renvoie "trololololo"</span>	
+
+
+	<span class="nom_fonction">> Auto-in(dé)crémentation <</span>
+
+	pour <span class="variable">$a</span> = <span class="chiffre">2</span>.
+
+	<span class="variable">$a</span> += <span class="chiffre">1</span>;		<span class="commentaire"># $a = 3</span>
+	++<span class="variable">$a</span>;		<span class="commentaire"># $a = 3</span>
+	<span class="variable">$b</span> = ++<span class="variable">$a</span>;	<span class="commentaire"># $a et $b = 3</span>
+	<span class="variable">$b</span> = <span class="variable">$a</span>++;	<span class="commentaire"># $a = 3 et $b = 2</span>
+	--<span class="variable">$a</span>;		<span class="commentaire"># $a = 1</span>
+	<span class="variable">$b</span> = <span class="variable">$a</span>--;		<span class="commentaire"># $a = 1 et $b = 2</span>
+ 
+
+	<span class="nom_fonction">> chop et chomp <</span>
+
+	'<span class="fonction">chop</span>' supprime le dernier caractère de la valeur chaîne :
+	<span class="variable">$a</span> = <span class="texte">"hello world\n"</span>;
+	<span class="fonction">chop</span>(<span class="variable">$a</span>);		<span class="commentaire"># $a vaut "hello world"</span>
+	<span class="fonction">chop</span>(<span class="variable">$a</span>);		<span class="commentaire"># $a vaut "hello worl"</span>
+
+	'<span class="fonction">chomp</span>' ne supprime <u>QUE</u> le caractère 'nouvelle ligne' :
+	<span class="variable">$a</span> = <span class="texte">"hello world\n"</span>;
+	<span class="fonction">chomp</span>(<span class="variable">$a</span>);	<span class="commentaire"># $a vaut "hello world"</span>
+	<span class="fonction">chomp</span>(<span class="variable">$a</span>);	<span class="commentaire"># $a vaut <u>toujours</u> "hello world"</span>
+
+
+	<span class="nom_fonction">> pack et unpack <</span>
+
+	'<span class="fonction">pack</span>' prend une LISTE de valeurs ordinaires Perl,les convertit en une chaîne d'octets en fonction du CANEVAS et renvoie cette chaîne.
+		<span class="fonction">pack</span> CANEVAS, LISTE
+
+	'<span class="fonction">unpack</span>'
+	- développe une chaîne (EXPR) représentnant une structure de données et l'éclate selon le CANEVAS en liste de valeurs qu'elle renvoie.
+		<span class="fonction">unpack</span> CANEVAS, EXPR
+	- également très utile pour les données de texte brut, pas seulement pour les données binaires.
+	Supposez que vous ayez un fichier de données qui contiendrait des enregistrements ressemblant à ceci :
+
+		2000 Ingrid Caven                           Jean-Jacque Schuhl
+		1999 Première ligne                         Jean-Marie Laclavetine
+		1998 Confidence pour confidence    Paule Constant
+
+	pas de séparateur distinct, donc 'split' inutile.
+	Mais les champs sont déterminés par leur décalage d'octets.
+		<span class="fonction">while</span> (<>) {
+			(<span class="variable">$annee</span>, <span class="variable">$titre</span>, <span class="variable">$auteur</span>) = <span class="fonction">unpack</span>("A4 x A26 A*", <span class="variable">$_</span>);
+			<span class="fonction">print</span> <span class="texte">"$auteur a gagné le prix $annee pour $titre\n"</span>;
+		}
+
+
+
+
+<span class="nom_chapitre" id="Tableaux et listes">Tableaux et listes</span>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+<span class="tableau">@outTABL</span>=instruction;	<span class="commentaire"># cela peut être le contenu d'un fichier ou le résultat d'une requête par exemple</span>
+
+	<span class="nom_fonction">> assignations <</span>
+
+	<span class="tableau">@fred</span> = qw(one two);
+	<span class="tableau">@barney</span> = (<span class="chiffre">4</span>,<span class="chiffre">5</span>,<span class="tableau">@fred</span>,<span class="chiffre">6</span>);	<span class="commentaire"># @barney devient (4,5,"one","two",6)</span>
+	<span class="tableau">@barney</span> = (<span class="chiffre">8</span>,<span class="tableau">@barney</span>);	<span class="commentaire"># met 8 devant @barney</span>
+	<span class="tableau">@barney</span> = (<span class="tableau">@barney</span>,<span class="texte">"last"</span>);	<span class="commentaire"># et "last" à la fin</span>
+
+	<span class="tableau">@phil</span> = (<span class="tableau">@nath</span> = (<span class="chiffre">2</span>,<span class="chiffre">3</span>,<span class="chiffre">4</span>));	<span class="commentaire"># @phil et @nath contiennent (2,3,4)</span>
+	<span class="tableau">@phil</span> = <span class="tableau">@nath</span> = (<span class="chiffre">2</span>,<span class="chiffre">3</span>,<span class="chiffre">4</span>);	<span class="commentaire"># idem</span>
+
+	<span class="variable">$a</span> = <span class="tableau">@fred</span>;	<span class="commentaire"># $a devient 2, longueur de @fred</span>
+	(<span class="variable">$a</span>) = <span class="tableau">@fred</span>;	<span class="commentaire"># $a devient "one", le premier élément de @fred</span>
+
+	(<span class="variable">$a</span>,<span class="variable">$b</span>,<span class="variable">$c</span>) = (<span class="chiffre">1</span>,<span class="chiffre">2</span>,<span class="chiffre">3</span>);		<span class="commentaire"># $a = 1, $b = 2, $c =3</span>
+	(<span class="variable">$a</span>,<span class="variable">$b</span>) = (<span class="variable">$b</span>,<span class="variable">$a</span>);		<span class="commentaire"># permute $a $b</span>
+	(<span class="variable">$d</span>,<span class="tableau">@fred</span>) = (<span class="variable">$a</span>,<span class="variable">$b</span>,<span class="variable">$c</span>);	<span class="commentaire"># met $a dans $d, et ($b,$c) dans @fred</span>
+	(<span class="variable">$e</span>,<span class="tableau">@fred</span>) = <span class="tableau">@fred</span>;		<span class="commentaire"># déplace le 1er élément de @fred dans $e  :  @fred = ($c) et $e = $b</span>
+
+	<span class="tableau">@RESULT</span>=<span class="texte">`"D:\\Public\\PRG\\MediaInfo\\MediaInfo_CLI.exe" --Output=HTML "$filename"`</span>;
+
+	<span class="nom_fonction">> accès à un élément de tableau <</span>
+
+	<span class="variable">$val</span>=<span class="variable">$TABL_FIC</span>[<span class="chiffre">0</span>];	<span class="commentaire"># $val prend la 1<sup>ère</sup> valeur du tableau @TABL_FIC</span>
+	<span class="variable">$val</span>=<span class="variable">$TABL_FIC</span>[<span class="chiffre">3</span>];	<span class="commentaire"># $val prend la 4<sup>ème</sup> valeur du tableau @TABL_FIC</span>
+	<span class="variable">$TABL_FIC</span>[<span class="chiffre">3</span>] = <span class="chiffre">5</span>;		<span class="commentaire"># le 4<sup>ème</sup> élément du tableau prend la valeur de 5</span>
+	(<span class="tableau">@fred</span>[<span class="chiffre">0</span>],<span class="tableau">@fred</span>[<span class="chiffre">1</span>]) = (<span class="tableau">@fred</span>[<span class="chiffre">1</span>],<span class="tableau">@fred</span>[<span class="chiffre">0</span>])	<span class="commentaire"># permute les 2 valeurs</span>
+	<span class="tableau">@fred</span>[<span class="chiffre">0</span>,<span class="chiffre">1</span>] = <span class="tableau">@fred</span>[<span class="chiffre">1</span>,<span class="chiffre">0</span>]			<span class="commentaire"># idem</span>
+
+
+	<span class="nom_fonction">> push et pop <</span>
+
+	'<span class="fonction">push</span>' ajoute une/des valeurs à la suite du tableau :
+	<span class="fonction">push</span>(<span class="tableau">@CONTENU</span>, <span class="variable">$_</span>);
+	<span class="fonction">push</span>(<span class="tableau">@CONTENU</span>,<span class="chiffre">4</span>,<span class="chiffre">5</span>,<span class="chiffre">6</span>);
+
+	voir la fonction '<span class="fonction">map</span>' pour suppression des espaces créés par le 'push'
+
+
+	'<span class="fonction">pop</span>' supprime le dernier élément du tableau :
+	<span class="variable">$oldvalue</span> = <span class="fonction">pop</span>(<span class="tableau">@CONTENU</span>);		<span class="commentaire"># renvoie undef si liste vide</span>
+
+	L'index du dernier élément d'un tableau peut être obtenu en faisant : <span class="variable">$last</span> = <span class="variable">$#tableau</span>;
+
+
+	<span class="nom_fonction">> shift et unshift <</span>
+
+	<span class="tableau">@fred</span> = (<span class="chiffre">5</span>,<span class="chiffre">6</span>,<span class="chiffre">7</span>);
+	<span class="fonction">unshift</span>(<span class="tableau">@fred</span>,<span class="chiffre">2</span>,<span class="chiffre">3</span>,<span class="chiffre">4</span>);	<span class="commentaire"># @fred contient (2,3,4,5,6,7)</span>
+	<span class="variable">$x</span> = <span class="fonction">shift</span>(<span class="tableau">@fred</span>);		<span class="commentaire"># $x=2 et @fred contient (3,4,5,6,7)</span>
+
+
+	<span class="nom_fonction">> sort / reverse / chomp <</span>
+
+	'<span class="fonction">sort</span>' trie le tableau en ordre ASCII ascendant (traduit en simple chaine de caractère => 1,16,2,3,31,5)
+	'<span class="fonction">reverse</span>' inverse l'ordre du tableau
+	'<span class="fonction">chomp</span>' supprime d'un coup tous les \n du tableau
+
+	<span class="tableau">@TAB</span> = <span class="fonction">sort</span> (<span class="tableau">@TAB</span>); 		<span class="commentaire"># tri croissant du tableau</span>
+	<span class="tableau">@TAB</span> = <span class="fonction">reverse</span> (<span class="tableau">@TAB</span>); 		<span class="commentaire"># inverse l'ordre du tableau - sans tri -</span>
+	<span class="tableau">@TAB</span> = <span class="fonction">reverse</span> (<span class="fonction">sort</span> (<span class="tableau">@TAB</span>)); 	<span class="commentaire"># inverse l'ordre du tableau - après tri -</span>
+	<span class="tableau">@stuff</span> = (<span class="texte">"hello\n"</span>,<span class="texte">"world\n"</span>,<span class="texte">"happy days"</span>);
+	<span class="fonction">chomp</span>(<span class="tableau">@stuff</span>);		<span class="commentaire"># @stuff contient ("hello","world","happy days")</span>
+
+	<span class="tableau">@numbers</span> = (<span class="chiffre">14</span>, <span class="chiffre">3</span>, <span class="chiffre">12</span>, <span class="chiffre">2</span>, <span class="chiffre">23</span>);
+	<span class="tableau">@sorted_numbers</span> = <span class="fonction">sort</span> { <span class="variable">$a</span> <=> <span class="variable">$b</span> } <span class="tableau">@numbers</span>;	<span class="commentaire"># @sorted_numbers contient (2,3,12,14,23)</span>
+
+
+	<span class="nom_fonction">> splice <</span>
+	<span class="fonction">splice</span> <span class="tableau">TABLEAU</span>,OFFSET,LONGUEUR,LISTE 
+	<span class="fonction">splice</span> <span class="tableau">TABLEAU</span>,OFFSET,LONGUEUR
+	<span class="fonction">splice</span> <span class="tableau">TABLEAU</span>,OFFSET
+	<span class="fonction">splice</span> <span class="tableau">TABLEAU</span>
+	Supprime d'un tableau les éléments consécutifs désignés par OFFSET (indice du premier élément) et LONGUEUR (nombre d'éléments concernés) et les remplace par les éléments de LISTE si il y en a.
+	Dans un contexte de liste, renvoie les éléments supprimés du tableau. Dans un contexte scalaire, renvoie le dernier élément supprimé ou undef si aucun élément n'est supprimé. Le tableau grossit ou diminue si nécessaire. Si OFFSET est négatif, il est compté à partir de la fin du tableau. Si LONGUEUR est omis, supprime tout à partir de OFFSET. Si LONGUEUR est négatif, supprime les éléments à partir de OFFSET en laissant -LONGUEUR éléments à la fin du tableau. Si OFFSET et LONGUEUR sont omis, supprime tout ce qui est dans le tableau. Si OFFSET va au-delà de la fin du tableau, perl produit un message d'avertissement et splice agit à la fin du tableau.
+
+	Les équivalences suivantes sont vraies en supposant que <<$[ == 0 and $#a = $i> :>>
+	<span class="fonction">push</span>(<span class="tableau">@a</span>,<span class="variable">$x</span>,<span class="variable">$y</span>)      <span class="fonction">splice</span>(<span class="tableau">@a</span>,<span class="tableau">@a</span>,<span class="chiffre">0</span>,<span class="variable">$x</span>,<span class="variable">$y</span>)
+	<span class="fonction">pop</span>(<span class="tableau">@a</span>)             <span class="fonction">splice</span>(<span class="tableau">@a</span>,<span class="chiffre">-1</span>)
+	<span class="fonction">shift</span>(<span class="tableau">@a</span>)           <span class="fonction">splice</span>(<span class="tableau">@a</span>,<span class="chiffre">0</span>,<span class="chiffre">1</span>)
+	<span class="fonction">unshift</span>(<span class="tableau">@a</span>,<span class="variable">$x</span>,<span class="variable">$y</span>)   <span class="fonction">splice</span>(<span class="tableau">@a</span>,<span class="chiffre">0</span>,<span class="chiffre">0</span>,<span class="variable">$x</span>,<span class="variable">$y</span>)
+	<span class="variable">$a</span>[<span class="variable">$i</span>] = <span class="variable">$y</span>         <span class="fonction">splice</span>(<span class="tableau">@a</span>,<span class="variable">$i</span>,<span class="chiffre">1</span>,<span class="variable">$y</span>)
+
+
+	<span class="nom_fonction">> map <</span>
+
+	'<span class="fonction">map</span>' prend en paramètres un bloc d'instructions et une liste
+	elle applique le bloc à chacun des éléments de la liste (modification possible de la liste) et renvoie la liste constituée des valeurs successives de l'expression évaluée.
+
+	<span class="tableau">liste2</span> = <span class="fonction">map</span>( { expression } <span class="tableau">liste1</span> ); (attention à ne pas mettre de virgule entre le bloc d'instructions et la liste).
+
+	La variable spéciale <span class="variable">$_</span> vaut localement (dans le bloc d'instructions) chaque élément de la liste. La valeur de la dernière expression du bloc sera placée dans la liste résultat.
+
+	Voici quelques exemples :
+
+	<span class="tableau">@s</span> = <span class="fonction">map</span>( { -<span class="variable">$_</span> } <span class="tableau">@t</span> ); 		<span class="commentaire">Le tableau @s aura pour valeurs les opposés des valeurs de @t.</span>
+	<span class="tableau">@p</span> = <span class="fonction">map</span>( { <span class="variable">$_</span>.<span class="texte">"s"</span> } <span class="tableau">@t</span> ); 		<span class="commentaire">Tous les mots de @t sont mis au pluriel dans @p.</span>
+	<span class="tableau">@s</span> = <span class="fonction">map</span>( { <span class="fonction">substr</span>(<span class="variable">$_</span>,<span class="chiffre">0</span>,<span class="chiffre">2</span>) } <span class="tableau">@t</span> ); 		<span class="commentaire">Le tableau @s aura pour valeurs les deux premiers caractères des valeurs de @t.</span>
+	<span class="tableau">@s</span> = <span class="fonction">map</span>( { fonction(<span class="variable">$_</span>) } <span class="tableau">@t</span> ); 		<span class="commentaire">Vous pouvez écrire votre propre fonction ; les valeurs qu'elle renverra seront placées dans @s.</span>
+	<span class="tableau">@s</span> = <span class="fonction">map</span>( { <span class="variable">$_</span>=~<span class="texte">s/^\s(.*)$//g</span> } <span class="tableau">@t</span> ); 		<span class="commentaire">Suppression des espaces créés par le 'push'   si fonctionne pas voir dans les blocs</span>
+
+	Dans les exemples qui précèdent, la liste d'origine n'est pas modifiée (sauf dans le dernier exemple où elle peut l'être dans la fonction). Voici un exemple de modification de liste :
+	<span class="fonction">map</span>( { <span class="variable">$_</span>*=<span class="chiffre">4</span> } <span class="tableau">@t</span> ); 		<span class="commentaire">Tous les éléments de @t sont multipliés par quatre.</span>
+
+	<b><span class="chiffre" style="text-decoration: underline;">/!\ ATTENTION</span></b> : certaines fonctions du 'map' <b><span class="chiffre">NE SUPPORTE PAS</span></b> le renvoi vers un tiers tableau => <span class="tableau">@s</span> = .
+	                Il faut traiter directement le tableau  <span class="fonction">map</span>( { fonction(<span class="variable">$_</span>) } <span class="tableau">@t</span> );
+
+
+
+
+
+
+<span class="nom_chapitre" id="Structures de controle">Structures de controle</span>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+	<span class="nom_fonction">> if/unless <</span>
+
+	unless revient à dire "si la condition est fausse alors ...".
+	unless peut aussi avoir 'else'.
+
+	  exemple 1 :
+		<span class="fonction">if</span> (condition) {
+		    si vrai_instruction_1;
+		    si vrai_instruction_2;
+		    si vrai_instruction_3;
+		} <span class="fonction">else</span> {
+		    si faux_instruction_1;
+		    si faux_instruction_2;
+		    si faux_instruction_3;
+		}
+
+
+	  exemple 2 :
+		<span class="fonction">if</span> (condition c1) {
+		    si c1 vrai_instruction_1;
+		    si c1 vrai_instruction_2;
+		    si c1 vrai_instruction_3;
+		} <span class="fonction">elsif</span> (condition c2) {
+		    si c2 vrai_instruction_1;
+		    si c2 vrai_instruction_2;
+		    ...
+		} <span class="fonction">else</span> {
+		    si tous faux_instruction_1;
+		    si tous faux_instruction_2;
+		    ...
+		}
+
+
+
+	<span class="nom_fonction">> while/until <</span>
+
+	Ils ont la même syntaxe.
+
+	  exemple pour While :
+		<span class="fonction">while</span> (condition) {
+		    instruction_1;
+		    instruction_2;
+		    instruction_3;
+		}
+
+	  
+	  
+	<span class="nom_fonction">> do { } while/until <</span>
+
+	Ressemble exactement à l'instruction while normale, sauf qu'elle ne teste la condition qu'<u>après</u> avoir exécuté la boucle une <u>1<sup>ère</sup> fois</u>.
+	Perl exécute le bloc do. Puis évalue le while. Si la condition est vraie, le bloc est ré-exécuté, puis la condition re-testée. etc...
+	unless peut aussi être utilisé.
+
+		<span class="fonction">do</span> {
+		    instruction_1;
+		    instruction_2;
+		    instruction_3;
+		} <span class="fonction">while</span> (condition);
+
+
+
+	<span class="nom_fonction">> for <</span>
+
+	Dans l'exemple suivant : exécute l'initial_exp; controle le test_exp; si vrai alors execute le bloc; puis procède au re-init_exp.
+	l'init de départ n'est pas obligatoire.
+
+		<span class="fonction">for</span> (initial_exp; test_exp; re-init_exp) {
+		    instruction_1;
+		    instruction_2;
+		    instruction_3;
+		}
+
+	  equivaut à :
+		initial_exp;
+		<span class="fonction">while</span> (test_exp) {
+		    instruction_1;
+		    instruction_2;
+		    instruction_3;
+		    re-init_exp;
+		}
+
+
+
+	<span class="nom_fonction">> foreach <</span>
+
+	Prend une série de valeurs et les assignes 1 à 1 à une variable scalaire en exécutant le bloc pour chaque valeur.
+
+		<span class="fonction">foreach</span> <span class="variable">$i</span> (<span class="tableau">@liste</span>) {
+		    instruction_1;
+		    instruction_2;
+		    instruction_3;
+		}
+
+
+
+
+<span class="nom_chapitre" id="Structures de controle">Sortie de boucle</span>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+	<span class="nom_fonction">> redo <</span>
+
+	redo est l'instruction de rupture qui permet de reprendre l'itération en cours au début du bloc de code.
+
+		while (something) {
+		    # redo conduit ici
+		    firstpart;
+			firstpart;
+			if (unecondition) {
+			    somepart;
+				somepart;
+				redo;
+			}
+			otherpart;
+			otherpart;
+		}
+
+
+
+	<span class="nom_fonction">> next (saut inconditionnel) <</span>
+
+	next est l'instruction qui permet de passer à l'itération suivante. Elle effectue un saut direct à la fin du bloc de code.
+	permet de faire sauter à la boucle une ou plusieurs valeurs sans pour autant mettre fin à celle-ci.
+
+		while (something) {
+		    firstpart;
+			firstpart;
+			if (unecondition) {
+			    somepart;
+				somepart;
+				next;
+			}
+			otherpart;
+			otherpart;
+			# next conduit ici
+		}
+
+
+	  exemple :
+		while ($x<=10) {
+		    if ($x == 7) {
+		        printf("division par 0");
+		        $x++;
+		        next;	    <span class="commentaire"># on annule la boucle du while en cours (x=7) et on retourne à la prochaine boucle (x=8)</span>
+		    }
+		    $a = 1/($x-7);
+		    printf("%d", $a);
+		    $x++;
+		}
+
+
+
+	<span class="nom_fonction">> last (arrêt inconditionnel) <</span>
+
+	last est l'instruction qui permet d'arriver directement à la fin de la dernière itération.
+	On sort des traitements/boucles et on continue l'exécution du programme aux instructions qui suivent.
+
+
+
+	Ces ruptures de séquence fonctionnent aussi sur des boucles imbriquées.
+	Dans ce cas, pour savoir de quelle boucle on souhaite rompre la séquence, il faut étiqueter les boucles et préciser l'étiquette à la rupture de séquence :
+
+		EXTERNE: <span class="fonction">foreach</span> <span class="variable">$i</span> ( 0 .. 10 ) {
+		    INTERNE: <span class="fonction">foreach</span> <span class="variable">$j</span> ( 0 .. 10 ) {
+		        <span class="fonction">next</span> EXTERNE <span class="fonction">if</span> ( ( <span class="variable">$i</span> + <span class="variable">$j</span> ) > 10 );
+		        <span class="fonction">print</span> <span class="texte">"i=$i - j=$j\n"</span>;
+		        }
+		}
+
+	Dès que la valeur de <span class="variable">$j</span> est suffisante pour que (<span class="variable">$i</span>+<span class="variable">$j</span>) soit supérieur à 10, on passe à la valeur suivante de <span class="variable">$i</span>, par passage à l'itération suivante de la boucle EXTERNE.
+	On aurait aussi pu remplacer le next EXTERNE par un last INTERNE, le résultat aurait été le même...
+	mais en Perl, il y a plus d'une façon de le faire !	
+
+
+
+	<span class="nom_fonction">> goto <</span>
+
+	Il existe aussi une instruction goto qui permet de faire un saut dans l'exécution du code, jusqu'à une étiquette donnée (fixée à l'écriture du programme, ou évaluée dynamiquement.
+	Utiliser ce type d'instruction n'est pas vraiment une bonne idée. Le langage étant par ailleurs riche en structures de contrôles et en instructions de ruptures,
+	l'usage de cette instruction peut être carrément néfaste, à la maintenance du code si ce n'est à son exécution.
+
+		<span class="fonction">if</span> (condition) {
+		    si vrai_instruction_1;
+		    si vrai_instruction_2;
+		    si vrai_instruction_3;
+		} <span class="fonction">else</span> {
+		    si faux_instruction_1;
+		    si faux_instruction_2;
+		    si faux_instruction_3;
+		}
+
+
+
+
+<span class="nom_chapitre" id="Hachages">Hachages</span>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+	<span class="nom_fonction">> Le hash ne contient qu'un tableau <</span>
+
+	1. Déclaration
+
+		<span class="fonction">my</span> %budgets;
+
+		%budgets = (keyA=>[budgetA,MontantA],
+		            keyB=>[budgetB,MontantB],
+		            keyC=>[budgetC,MontantC]
+		            );
+		Déclaration et remplissage â la volée :
+
+		#!/user/local/perl.5.8/bin/perl5.8.7
+
+		<span class="fonction">use</span> strict;
+		<span class="fonction">use</span> warnings;
+
+		<span class="fonction">my</span> (%donnees, <span class="variable">$dk</span>);
+
+		<span class="fonction">my</span> (<span class="variable">$binnen</span>, <span class="variable">$INFILE</span>);
+		<span class="variable">$binnen</span> = "monfichier";
+		<span class="fonction">open</span> (<span class="variable">$INFILE</span>, "<$binnen");
+		<span class="fonction">binmode</span> <span class="variable">$INFILE</span>, ':utf8';
+		<span class="fonction">while</span> (<<span class="variable">$INFILE</span>>) {
+		        <span class="fonction">if</span> (<span class="variable">$_</span> =~ /^UNIMARC {DORIS_KEY "(\d+)",/) {
+		            <span class="variable">$dk</span> = <span class="variable">$1</span>;
+		        }
+		        <span class="fonction">if</span> (<span class="variable">$_</span> =~ /^200a "[0-9\\]*(.+?)",/) {
+		            ${<span class="variable">$donnees</span>{<span class="variable">$dk</span>}}[0] = <span class="variable">$1</span>;
+		        }
+		        <span class="fonction">if</span> (<span class="variable">$_</span> =~ /^200f "(.*?)"/) {
+				    ${<span class="variable">$donnees</span>{<span class="variable">$dk</span>}}[1] = <span class="variable">$1</span>;
+				}
+		}
+		<span class="fonction">close</span> <span class="variable">$INFILE</span>;
+
+		<span class="fonction">foreach</span> <span class="variable">$dk</span> (keys %donnees) {
+		    <span class="fonction">print</span> <span class="variable">$dk</span> . " : " . ${<span class="variable">$donnees</span>{<span class="variable">$dk</span>}}[0] . " / " . ${<span class="variable">$donnees</span>{<span class="variable">$dk</span>}}[1] . "\n";
+		}
+
+	2. Accéder
+
+		<span class="fonction">print</span> <span class="variable">$budgets</span>{keyA}[0]."\n";
+		<span class="variable">$budgets</span>{keyA} contient [budgetA,MontantA]
+		Donc <span class="variable">$budgets</span>{keyA}[0] contient budgetA
+
+	3. Ajouter un élément à un tableau
+
+		<span class="fonction">push</span> @{<span class="variable">$budgets</span>{keyA}},"MontantAA";
+		<span class="variable">$budgets</span>{keyA} contient maintenant [budgetA,MontantA,MontantAA]
+		Donc <span class="variable">$budgets</span>{keyA}[2] contient MontantAA
+
+	4. Connaître le nombre de clés dans le hash
+
+		<span class="fonction">my</span> @liste_cles = <span class="fonction">keys</span> %budgets;
+		<span class="fonction">print</span> ($#liste_cles + 1), <span class="fonction">print</span> "\n";
+
+	5. Parcourir chaque élément du hash en ordre
+
+		@liste_cles = <span class="fonction">sort</span> <span class="fonction">keys</span> %budgets;
+		<span class="fonction">foreach</span> <span class="variable">$cle</span> (@liste_cles) {
+			<span class="fonction">print</span> <span class="variable">$budgets</span>{<span class="variable">$cle</span>}[1]."\n";
+		}
+		Ou bien, en économisant une variable :
+
+		<span class="fonction">foreach</span> <span class="variable">$cle</span> (<span class="fonction">sort</span> <span class="fonction">keys</span> %budgets) {
+			<span class="fonction">print</span> <span class="variable">$budgets</span>{<span class="variable">$cle</span>}[1]."\n";
+		}
+
+
+	<span class="nom_fonction">> Le hash contient un tableau de tableaux <</span>
+
+	1. Déclaration
+
+		<span class="fonction">my</span> %budgets;
+		%budgets = (keyA=>[[budgetA,MontantA],[budgetA2,MontantA2]]
+		            keyB=>[budgetB,MontantB],
+		            keyC=>[budgetC,MontantC]
+		);
+	2. Accéder
+
+		<span class="fonction">print</span> <span class="variable">$budgets</span>{keyA}[0][0]."\n";
+		<span class="variable">$budgets</span>{keyA} contient [[budgetA,MontantA],[budgetA2,MontantA2]]
+		Donc <span class="variable">$budgets</span>{keyA}[0] contient [budgetA,MontantA]
+		Donc <span class="variable">$budgets</span>{keyA}[0][0] contient budgetA
+
+	3. Ajouter un tableau à une clé
+
+		<span class="fonction">push</span> @{<span class="variable">$budgets</span>{keyA}},[budgetA3,MontantA3];
+		<span class="fonction">print</span> <span class="variable">$budgets</span>{keyA}[2][0]."\n";
+		<span class="variable">$budgets</span>{keyA} contient maintenant [[budgetA,MontantA],[budgetA2,MontantA2],[budgetA3,MontantA3]]
+		Donc <span class="variable">$budgets</span>{keyA}[2] contient [budgetA3,MontantA3]
+		Donc <span class="variable">$budgets</span>{keyA}[2][0] contient budgetA3
+
+	4. Connaître le nombre de clés dans le hash
+
+		<span class="fonction">my</span> @liste_cles = <span class="fonction">keys</span> %budgets;
+		<span class="fonction">print</span> ($#liste_cles + 1), <span class="fonction">print</span> "\n";
+
+	5. Parcourir chaque élément du hash en ordre
+
+		@liste_cles = <span class="fonction">sort</span> <span class="fonction">keys</span> %budgets;
+		<span class="fonction">foreach</span> <span class="variable">$cle</span> (@liste_cles)
+		{
+		<span class="fonction">print</span> <span class="variable">$budgets</span>{$cle}[0][1]."\n";
+		}
+		Ou bien, en économisant une variable :
+
+		<span class="fonction">foreach</span> <span class="variable">$cle</span> (<span class="fonction">sort</span> <span class="fonction">keys</span> %budgets)
+		{
+		<span class="fonction">print</span> <span class="variable">$budgets</span>{<span class="variable">$cle</span>}[0][1]."\n";
+		}
+
+	6. Savoir combien une clé a d'éléments
+
+		Pour avoir le nombre d'éléments d'un tableau @tableau, il suffit d'appeler la variable @tableau dans un contexte scalaire : print @tableau;
+
+		On a donc, logiquement :
+
+		<span class="fonction">print</span> @{<span class="variable">$budgets</span>{keyA}}."\n";
+		Et pour avoir le nombre d'éléments d'un tableau dans un tableau :
+
+		<span class="fonction">print</span> @{<span class="variable">$budgets</span>{keyA}[0]}."\n";
+</pre>		
+<details>
+	<summary>Commandes Tables de hachage détaillées</summary>		
+<pre>
+   Les tables de hachage de Perl ne se retrouvent pas dans beaucoup d'autres langages ;
+   pour les avoir souvent utilisées en Perl, il est dur de repasser
+   à des langages qui n'en sont pas pourvus.
+</p><p>
+   Une table de hachage (<em class="emphasis">hash table</em> en anglais) est un
+   type de donnée en Perl permettant d'associer une valeur à une clef.
+   On peut dire d'un tableau (notion abordée précédemment) qu'il associe
+   une valeur scalaire à un entier : à la position <em class="emphasis">i</em>
+   (pour <em class="emphasis">i</em> entier), une certaine valeur scalaire est présente.
+   Une table de hachage va nous permettre d'aller au-delà : on pourra faire
+   correspondre une valeur scalaire (comme pour un tableau) à toute
+   chaîne de caractères (plutôt qu'à un entier).
+</p><p>
+   Je peux, par exemple, avoir envie de gérer en Perl un index téléphonique
+   simple : chacun de mes amis a un numéro de téléphone, je veux pouvoir
+   retrouver leur numéro à partir de leur prénom. Je vais donc associer
+   le numéro au prénom :
+</p><span class="programlisting">
+	"Paul"     -&gt; "01.23.45.67.89"
+	"Virginie" -&gt; "06.06.06.06.06"
+	"Pierre"   -&gt; "heu ..."
+</span><p>
+   Les prénoms seront les clefs, c'est-à-dire le "point d'entrée"
+   dans la table de hachage (comme les indices numéraux le sont pour les tableaux).
+   Les numéros de téléphone seront les valeurs associées à ces clefs.
+   Il s'agit bien d'une association chaîne de caractères vers scalaire.
+</p><p>
+   Vous l'avez sans doute compris, dans une table de hachage, une clef n'est présente
+   qu'une seule fois et ne peut donc avoir
+   qu'une seule valeur (comme l'élément d'un indice donné d'un tableau).
+   Par contre, une valeur peut être associée à plusieurs clefs.
+</p><div class="sect2"><h4 class="title">6.1. Déclaration et initialisation</h4><p>
+      Une variable de type table de hachage se déclare de la sorte :
+   </p><pre class="programlisting">
+	my %h;
+</pre><p>
+      On a alors une table de hachage vide (aucune clef).
+      Il est possible de signaler explicitement que l'on déclare une table
+      de hachage vide :
+   </p><pre class="programlisting">
+	my %h = ();
+</pre><p>
+      Pour donner des valeurs initiales à notre table de hachage,
+      on peut utiliser la syntaxe suivante :
+   </p><pre class="programlisting">
+	my %h = ( "Paul"     =&gt; "01.23.45.67.89",
+                "Virginie" =&gt; "06.06.06.06.06",
+                "Pierre"   =&gt; "heu ..." );
+</pre><p>
+      Cette dernière table de hachage est déclarée et initialisée avec
+      les clefs <code class="function">Paul</code>, <code class="function">Virginie</code> et
+      <code class="function">Pierre</code> ayant respectivement pour valeurs
+      <code class="function">01.23.45.67.89</code>, <code class="function">06.06.06.06.06</code>
+      et <code class="function">heu ...</code>
+
+   </p></div><div class="sect2"><h4 class="title">6.2. Accéder à un élément</h4><p>
+      Dans une table de hachage <code class="function">%h</code>, on peut accéder à la
+      valeur d'une clef au moyen de la syntaxe suivante :
+      <code class="function">$h{</code><em class="emphasis">clef</em><code class="function">}</code> ;
+      par exemple <code class="function">$h{Paul}</code> vaut <code class="function">01.23.45.67.89</code>.
+      Si la clef comporte d'autres caractères que des lettres, des chiffres et
+      le souligné (underscore en anglais '<code class="function">_</code>'), il faut la délimiter au moyen
+      de simples ou de doubles-quotes : <code class="function">$h{"Marie-Pierre"}</code>
+      ou
+      <code class="function">$h{'Marie-Pierre'}</code>.
+   </p><p>
+      En fait, cette syntaxe force un contexte de chaîne de caractères entre
+      les accolades, ce qui fait qu'un mot simple (<em class="emphasis">bareword</em>
+      en anglais) sera converti silencieusement en chaîne de caractères
+      (même en positionnant le pragma <code class="function">use warnings;</code>).
+   </p><p>
+      De façon similaire aux tableaux avec l'arobase (<code class="function">@t</code>),
+      la totalité d'une table de hachage se représente au moyen du signe
+      pourcentage (<code class="function">%h</code>), alors qu'une valeur particulière est
+      désignée à l'aide d'un dollar
+      <code class="function">$h{</code><em class="emphasis">clef</em><code class="function">}</code>,
+      cette dernière expression étant bien une variable de type scalaire.
+   </p><p>
+      Voici quelques exemples de manipulation d'éléments de la table de hachage
+      <code class="function">%h</code> :
+   </p><pre class="programlisting">
+	$h{Jacques} = "02.02.02.02.02";
+	print "Tél : $h{Jacques}\n";
+	$h{'Jean-Paul'} = "03.03.03.03.03";
+	if( $h{"Jean-Paul"} ne "Heu ..." ) {
+		...
+	}
+</pre><p>
+      La clef utilisée pour cette syntaxe peut tout à fait être contenue dans
+      une variable scalaire (qui sera évaluée en contexte de chaîne de caractères) :
+   </p><pre class="programlisting">
+	my $k = "Jacques";
+	$h{$k} = "02.02.02.02.02";
+</pre><p>
+      Elle peut même être une expression plus complexe :
+   </p><pre class="programlisting">
+	sub f { return "Jac"; }
+	$h{f().'ques'} = "02.02.02.02.02";
+</pre></div><div class="sect2"><h4 class="title">6.3. Parcours</h4><p>
+      Il existe trois fonctions permettant de parcourir une table de hachage.
+      Dans les exemples fournis, nous considérerons que la table <code class="function">%h</code>
+      a été déclarée ainsi :
+   </p><pre class="programlisting">
+	my %h = ( "Paul"     =&gt; "01.23.45.67.89",
+                "Virginie" =&gt; "06.06.06.06.06",
+                "Pierre"   =&gt; "heu ..." );
+</pre><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p><a id="idm45717322071360"></a>
+            <code class="function">keys</code> : obtenir une liste des clefs
+         </p><p>
+            Cette fonction prend en paramètre une table de hachage
+            et renvoie une liste comportant toutes les clefs de la table.
+            L'ordre des clefs est quelconque, seule l'exhaustivité des clefs
+            est garantie.
+         </p><pre class="programlisting">
+	my @t = keys(%h);
+</pre><p>
+            Le tableau <code class="function">@t</code> peut par exemple valoir
+            la liste <code class="function">("Virginie",</code> <code class="function">"Pierre",</code>
+            <code class="function">"Paul")</code>.
+         </p><p>
+            Cette fonction va nous permettre de parcourir toute la table de hachage
+            en effectuant une boucle sur la liste des clefs :
+         </p><pre class="programlisting">
+	foreach my $k (keys(%h)) {
+		print "Clef=$k Valeur=$h{$k}\n";
+	}
+</pre><p>
+            La variable de boucle <code class="function">$k</code> prendra pour valeurs
+            successives l'ensemble des clefs de la table, l'expression
+            <code class="function">$h{$k}</code> est la valeur associée à la clef
+            <code class="function">$k</code>.
+            Ce petit programme affichera donc tous les couples clef/valeur
+            de la table <code class="function">%h</code>.
+         </p></li><li class="listitem"><p><a id="idm45717322061104"></a>
+            <code class="function">values</code> : obtenir une liste des valeurs
+         </p><p>
+            De la même façon que <code class="function">keys</code> renvoie une liste
+            des clefs d'une table de hachage, la fonction <code class="function">values</code>
+            fournit une liste des valeurs ; pour cette fonction non plus,
+            l'ordre n'est pas garanti et seule l'exhaustivité l'est.
+         </p><p>
+            L'exemple suivant
+         </p><pre class="programlisting">
+	foreach my $v (values(%h)) {
+		print "Valeur=$v\n";
+	}
+</pre><p>
+            affichera tous les numéros de téléphone (c'est-à-dire les valeurs) de la table
+            <code class="function">%h</code>.
+         </p><p>
+            Il n'est bien sûr pas possible de retrouver la clef des valeurs que l'on
+            manipule ainsi.
+         </p><p>
+            Il peut être intéressant de savoir que l'ordre des clefs renvoyées par
+            <code class="function">keys</code> et celui des valeurs par <code class="function">values</code>
+            sera le même à condition de ne pas modifier la table de hachage
+            entretemps.
+         </p></li><li class="listitem"><p><a id="idm45717322052672"></a>
+            <code class="function">each</code> : itération sur les couples (clef,valeur)
+         </p><p>
+             Cette fonction renvoie un à un tous les couples (clef,valeur)
+             d'une table de hachage. Elle a un comportement un peu spécial
+             du fait qu'il faut l'appeler autant de fois qu'il y a de couples :
+             c'est une fonction avec état, c'est-à-dire qu'elle ne renvoie pas
+             toujours la même chose d'un appel à l'autre : en effet, elle
+             renvoie le couple suivant ! De ce fait, je vous conseille de
+             toujours l'utiliser dans la syntaxe qui suit :
+         </p><pre class="programlisting">
+	while( my ($k,$v) = each(%h) ) {
+		print "Clef=$k Valeur=$v\n";
+	}
+</pre></li></ul></div><p>
+      Libre à vous de parcourir vos tables de hachage avec la fonction
+      qui vous convient le mieux.
+
+   </p></div><div class="sect2"><h4 class="title">6.4. Autovivification</h4><p>
+      Sous ce terme barbare se cache une idée simple : si vous tentez de modifier
+      un élément d'une table de hachage qui n'existe pas, il sera créé.
+      S'il est utilisé dans un contexte numérique, il prendra pour valeur initiale
+      zéro. S'il est utilisé dans un contexte de chaîne de caractères, il
+      prendra pour valeur la chaîne vide (depuis Perl 5.6).
+   </p><p>
+      Par exemple, considérons une table de hachage qui ne comporte pas la clef
+      <code class="function">hello</code> ; l'expression suivante
+   </p><pre class="programlisting">
+	$h{hello} .= "après";
+</pre><p>
+      associe à la clef <code class="function">hello</code> la valeur chaîne vide
+      puis lui concatène la chaîne <code class="function">"après"</code>.
+      De la même façon, l'expression
+   </p><pre class="programlisting">
+	$h{bye}++;
+</pre><p>
+      crée un élément de valeur 1.
+   </p><p>
+      Cette propriété d'autovivification est bien pratique dans le cas où l'on
+      ne connaît pas les clefs avant de devoir y accéder. Par exemple nous allons
+      pouvoir compter le nombre d'occurrences des mots dans un texte de manière
+      très simple. Supposons que les mots du texte soient déjà dans un tableau
+      (par exemple en utilisant la fonction <code class="function">qw</code> ; elle
+      ne règle pas les problèmes des ponctuations, des majuscules et des lettres
+      accentuées, mais elle suffira à notre exemple).
+      Nous allons utiliser chaque mot comme une clef de la table
+      et nous allons ajouter 1 à la valeur de cette clef :
+   </p><pre class="programlisting">
+	my @texte = qw( bonjour vous bonjour );
+	my %comptage = ();
+	foreach my $mot ( @texte ) {
+		$comptage{$mot}++;
+	}
+	while( my ($k,$v) = each(%comptage) ) {
+		print "Le mot '$k' est présent $v fois\n";
+	}
+</pre><p>
+      Ce qui donne l'affichage suivant :
+   </p><pre class="programlisting">
+	Le mot 'vous' est présent 1 fois
+	Le mot 'bonjour' est présent 2 fois
+</pre><p>
+      Dans la suite nous verrons comment découper un texte en mots
+      au moyen des expressions régulières.
+   </p></div><div class="sect2"><h4 class="title">6.5. Existence et suppression d'une clef</h4><p>
+      À la lecture de ce qui précède, il peut sembler impossible de savoir si
+      un élément d'une table de hachage existe ou non. Rassurez-vous,
+      les auteurs de Perl ont tout prévu <code class="function">:-)</code>
+      L'opérateur <code class="function">exists</code> renvoie vrai si l'élément de table
+      de hachage qu'on
+      lui donne en paramètre existe ; sinon il renvoie faux. Par exemple :
+   </p><pre class="programlisting">
+	if( exists( $h{hello} ) ) {
+		print "La clef 'hello' existe\n";
+	}
+</pre><p>
+      Il est important de noter qu'un test effectué au moyen de l'opérateur
+      <code class="function">defined</code> aurait été possible, mais dangereux.
+      En effet, l'expression <code class="function">defined(</code> <code class="function">$h{hello}</code>
+      <code class="function">)</code>
+      est fausse dans deux cas très différents : soit si l'élément n'existe pas,
+      soit si l'élément existe et vaut <code class="function">undef</code> ;
+      elle sera vraie si l'élément existe et ne vaut pas <code class="function">undef</code>.
+      Il est donc impossible de distinguer le cas d'un élément absent
+      et celui d'un élément indéfini (valant <code class="function">undef</code>)
+      avec <code class="function">defined</code>.
+   </p><p>
+      Cette distinction entre absent et indéfini peut paraître artificielle
+      dans ce cas (elle peut tout de même être importante dans certaines situations !),
+      mais dans le cas de la suppression d'une clef, il en est tout autrement.
+   </p><p>
+      Pour supprimer une clef dans une table de hachage, il faut utiliser
+      l'opérateur <code class="function">delete</code>. L'instruction
+   </p><pre class="programlisting">
+	delete( $h{hello} );
+</pre><p>
+      supprime la clef <code class="function">hello</code> de la table <code class="function">%h</code>
+      si elle existe (si elle n'existe pas, elle ne fait rien).
+      De la même façon que <code class="function">exists</code> est la bonne méthode
+      pour tester l'existence d'un élément, <code class="function">delete</code>
+      est la bonne méthode pour en supprimer un. Le débutant pourrait être
+      tenté d'écrire :
+   </p><pre class="programlisting">
+	$h{hello} = undef;  # attention!
+</pre><p>
+      Ce qui est fort différent, car dans ce cas, la clef <code class="function">hello</code>
+      aura une valeur indéfinie, mais existera toujours ! On la
+      retrouvera, par exemple, dans les parcours effectués au moyen des
+      opérateurs <code class="function">keys</code>, <code class="function">values</code> ou
+      <code class="function">each</code> ; ce qui n'est sans doute pas le but recherché.
+   </p><p>
+      Pour résumer, on peut dire que pour tester l'existence
+      d'une clef, il faut utiliser <code class="function">exists</code>
+      et que pour en supprimer une, il faut utiliser <code class="function">delete</code>.
+   </p><p>
+      En marge de ces deux fonctions, voici une manière de savoir
+      si une table de hachage est vide ou non (on qualifie
+      de vide une table de hachage qui ne comporte aucune clef).
+      Cette syntaxe utilise la table de hachage en contexte
+      de chaîne de caractères, par exemple de cette façon :
+   </p><pre class="programlisting">
+	if( %h eq 0 ) {
+		print "%h est vide\n";
+	}
+</pre><p>
+      La valeur d'un hachage en contexte scalaire n'a pas d'autre utilisation
+      que celle-ci. En effet, <code class="function">scalar(%A)</code> renvoie une valeur
+      du type <code class="function">4/8</code> qui indique le nombre de places
+      (<em class="emphasis">buckets</em> en anglais) utilisées par rapport au nombre total
+      disponible dans le hachage.
+      Une table vide est un cas particulier, elle renverra <code class="function">0</code>.
+   </p></div><div class="sect2"><h4 class="title">6.6. Tables de hachage et listes</h4><p>
+      On peut facilement passer d'une liste (ou tableau) à une table de hachage
+      et inversement. Voyez, par exemple, le petit programme suivant :
+   </p><pre class="programlisting">
+	my @t = ("Paul", "01.23.45.67.89", "Virginie",
+                "06.06.06.06.06", "Pierre", "heu ...");
+	my %h = @t;
+</pre><p>
+      La première instruction crée un tableau <code class="function">@t</code>
+      initialisé à une liste à six éléments. La seconde crée une table
+      de hachage <code class="function">%h</code> initialisée au moyen du précédent
+      tableau. Les valeurs du tableau sont prises deux à deux :
+      la première de chaque couple sera la clef dans la table de hachage,
+      la seconde la valeur.
+      Si le nombre d'éléments de la liste est impair, la dernière clef
+      créée aura <code class="function">undef</code> pour valeur.
+      Si une clef venait à être présente plusieurs fois dans la liste,
+      c'est la dernière valeur qui sera prise en compte dans la table
+      de hachage.
+   </p><p>
+      On aurait aussi pu écrire :
+   </p><pre class="programlisting">
+	my %h = ("Paul", "01.23.45.67.89", "Virginie",
+                "06.06.06.06.06", "Pierre", "heu ...");
+</pre><p>
+      Il est à noter que cette syntaxe rappelle étrangement l'un des premiers
+      exemples de création de table de hachage qui utilisait <code class="function">=&gt;</code>
+      pour séparer clefs et valeurs. Cette similarité est en fait une quasi-équivalence,
+      car l'opérateur <code class="function">=&gt;</code> peut être utilisé à la place
+      de la virgule pour créer des listes ; il n'a été ajouté au langage Perl
+      que pour faciliter la lecture des affectations de tables de hachage,
+      car il force un contexte de chaîne à sa gauche, ce qui permet
+      justement d'écrire <code class="function">%a = ( toto =&gt; 'titi' );</code>
+   </p><p>
+      La conversion dans l'autre sens est aussi possible.
+      L'évaluation d'une table de hachage dans un contexte de liste
+      renvoie une liste des clefs et des valeurs, se suivant respectivement deux à deux,
+      dans un ordre quelconque entre couples. La table de hachage <code class="function">%h</code>
+      de l'exemple précédent peut être affectée à un tableau :
+   </p><pre class="programlisting">
+	my @t2 = %h;
+</pre><p>
+      Le tableau <code class="function">@t2</code> sera initialisé, par exemple,
+      avec la liste suivante :
+      <code class="function">("Pierre",</code> <code class="function">"heu ...",</code>
+      <code class="function">"Paul",</code> <code class="function">"01.23.45.67.89",</code>
+      <code class="function">"Virginie",</code> 
+      <code class="function">"06.06.06.06.06")</code> ;
+      chaque clef précède sa valeur,
+      mais l'ordre des couples (clef,valeur) est quelconque (un peu comme pour la fonction
+      <code class="function">each</code>).
+   </p><p>
+      Une table de hachage se convertit en liste sans encombre dès qu'elle
+      est en contexte de liste. Je vous laisse deviner ce que fait le code
+      suivant :
+   </p><pre class="programlisting">
+	foreach my $x (%h) {
+		print "$x\n";
+	}
+</pre><p>
+      La fonction <code class="function">reverse</code>, qui nous a permis d'inverser
+      les listes, peut être employée pour inverser une table de hachage :
+   </p><pre class="programlisting">
+	%h = reverse(%h);
+</pre><p>
+      Les valeurs deviennent les clefs et inversement. Si plusieurs valeurs
+      identiques sont présentes, le comportement est imprévisible, car
+      certes, lors de la transformation de liste en table de hachage
+      la dernière valeur compte, mais lors de la transformation de table de hachage
+      en liste l'ordre est quelconque...
+   </p><p>
+      L'association individu - numéro de téléphone est idéale pour illustrer
+      cela :
+   </p><pre class="programlisting">
+	my %h = ("Paul", "01.23.45.67.89", "Virginie",
+                "06.06.06.06.06", "Pierre", "heu ...");
+	my %quidonc = reverse %h;
+</pre><p>
+      On pourra alors retrouver la personne à partir de son numéro
+      de téléphone. Si, par contre, Paul et Virginie avaient eu le même
+      numéro, on n'aurait pas pu prédire quelle serait la personne
+      renvoyée.
+   </p></div><div class="sect2"><h4 class="title">6.7. Exemples</h4><p>
+      Voici quelques exemples d'utilisation des tables de hachage.
+   </p><p>
+      Le premier concerne la variable spéciale <code class="function">%ENV</code>
+      qui contient les variables d'environnement du programme.
+      <code class="function">$ENV{PATH}</code> contient le <em class="emphasis">path</em>,
+      <code class="function">$ENV{HOME}</code> vaut le nom du répertoire personnel
+      de l'utilisateur qui exécute le programme, etc.
+   </p><p>
+      Deuxième exemple, les tables de hachage peuvent servir à constituer des
+      tableaux à plusieurs
+      dimensions ; on pourrait en effet imaginer avoir des clefs qui seraient
+      la concaténation des coordonnées dans les <em class="emphasis">n</em>
+      dimensions : <em class="emphasis">dim1:dim2:dim3:...</em>
+   </p><pre class="programlisting">
+	my %h = ();
+	foreach my $i (0..4) {
+		foreach my $j (-3..10) {
+			foreach my $k (130..148) {
+				$h{"$i:$j:$k"} = Calcul($i,$j,$k);
+			}
+		}
+	}
+</pre><p>
+      Nous verrons dans la suite qu'il est possible de bâtir
+      de réels tableaux à plusieurs dimensions en utilisant des références.
+   </p><p>
+      L'exemple suivant concerne les ensembles ; nous allons utiliser les tables
+      de hachage pour calculer l'union et l'intersection de deux ensembles.
+   </p><pre class="programlisting">
+# Voici mes deux ensembles
+# Je mets les éléments dans des tableaux
+my @ensA = (1, 3, 5, 6, 7, 8);
+my @ensB = (2, 3, 5, 7, 9);
+
+# Voici mon union et mon intersection,
+# les éléments des ensembles en seront les clefs
+my %union = ();
+my %inter = ();
+
+# Je mets tous les éléments de A dans l'union :
+foreach my $e (@ensA) { $union{$e} = 1; }
+
+# Pour tous les éléments de B :
+foreach my $e (@ensB) {
+
+    # S'il est déjà dans l'union, c'est qu'il est
+    # dans A : je le mets donc dans l'intersection :
+    $inter{$e} = 1 if ( exists( $union{$e} ) );
+
+    # Je le mets dans l'union
+    $union{$e} = 1;
+}
+
+# Tous les éléments présents dans A ou B
+# sont des clefs de la table union.
+# Tous les éléments présents dans A et B
+# sont des clefs de la table inter.
+
+# Je reconstitue des tableaux à partir
+# des tables de hachage (en les triant
+# pour l'affichage)
+my @union = sort( {$a&lt;=&gt;$b} keys(%union) );
+my @inter = sort( {$a&lt;=&gt;$b} keys(%inter) );
+
+print("@union\n");
+# affiche : 1 2 3 5 6 7 8 9
+print("@inter\n");
+# affiche : 3 5 7
+</pre><p>
+      Pour le même problème, voici une solution n'utilisant qu'une seule
+      table de hachage, je vous laisse le soin d'en apprécier le principe :
+   </p><pre class="programlisting">
+	my @ensA = (1, 3, 5, 6, 7, 8);
+	my @ensB = (2, 3, 5, 7, 9);
+
+	my %hash = ();  # Qu'une seule table ...
+
+	foreach my $e (@ensA) { $hash{$e}++; }
+	foreach my $e (@ensB) { $hash{$e}++; }
+
+	my @union = sort( {$a&lt;=&gt;$b} keys(%hash) );
+	my @inter = sort( {$a&lt;=&gt;$b}
+                  ( grep { $hash{$_}==2 } keys(%hash) )
+                );
+
+	print("@union\n");
+	# affiche : 1 2 3 5 6 7 8 9
+	print("@inter\n");
+	# affiche : 3 5 7
+</pre><p>
+      La compréhension de cet exemple demande d'avoir assimilé
+      plusieurs notions importantes vues jusqu'ici.
+   </p></div><div class="sect2"><h4 class="title">6.8. Tranches de tableau</h4><p>
+      Maintenant que nous connaissons tous les types de données de Perl,
+      notamment les tableaux et les tables de hachage, nous allons
+      voir comment on peut manipuler plusieurs éléments d'un tableau
+      ou d'une table de hachage à la fois. Cela s'appelle une <em class="emphasis">tranche</em>
+      (slice en anglais).
+   </p><p>
+      Une tranche de tableau est un sous-ensemble des éléments du tableau.
+      Imaginons par exemple un tableau <code class="function">@t</code> duquel
+      nous souhaiterions manipuler les éléments d'indice 4 et 10 ;
+      pour cela nous allons prendre la tranche correspondante de ce tableau :
+      <code class="function">@t[4,10]</code> est une liste à deux éléments
+      qui est équivalente à <code class="function">($t[4],$t[10])</code>.
+      Quelques explications sur la syntaxe. Tout d'abord, l'expression commence
+      par une arobase, car il s'agit d'une liste d'éléments ; le dollar est réservé
+      aux scalaires, par exemple <code class="function">$t[4]</code> est un scalaire.
+      Ensuite, comme d'habitude pour les tableaux, les crochets permettent de
+      spécifier les indices. Enfin, l'ensemble des indices est indiqué par une liste
+      d'entiers : <code class="function">@t[2,10,4,3] @t[3..5] @t[fonction()]</code>...
+   </p><p>
+      Une telle tranche est utilisable comme valeur (passage de paramètres, etc.)
+      et comme l-value (expression à gauche du signe égal d'affectation) :
+   </p><pre class="programlisting">
+	@t[4,10] = (4321,"age");
+</pre><p>
+      cette instruction affecte 4321 à l'indice 4 du tableau <code class="function">@t</code>
+      et la chaîne <code class="function">age</code> à l'indice 10. On aurait pu écrire
+   </p><pre class="programlisting">
+	($t[4],$t[10]) = (4321,"age");
+</pre><p>
+      Une autre utilisation des tranches de tableau apparaît avec les fonctions
+      qui renvoient une liste. Par exemple la fonction <code class="function">stat</code>
+      prend en paramètre un nom de fichier et renvoie toutes sortes
+      d'informations sur le fichier : taille, dates, propriétaire etc.
+      Il est courant d'écrire :
+   </p><pre class="programlisting">
+	($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,
+	$atime,$mtime,$ctime,$blksize,$blocks) = stat($filename);
+</pre><p>
+      La fonction renvoie une liste qui est affectée aux variables de la liste de gauche.
+      Les tranches peuvent intervenir si seules quelques informations vous intéressent
+      et que vous ne voulez pas déclarer de variables inutiles. Par exemple,
+      si seules les dates de modification (indice 9) et de création (indice 10)
+      vous intéressent, vous pouvez écrire :
+   </p><pre class="programlisting">
+	($mtime,$ctime) = ( stat($filename) )[9,10];
+</pre><p>
+      L'appel à la fonction est placé entre parenthèses et on ne prend que les éléments
+      d'indice 9 et 10 de sa valeur de retour. On a alors une liste à deux éléments, celle-ci est
+      affectée à la liste à gauche du signe égal et donc ces deux éléments
+      sont affectés aux deux variables.
+
+   </p></div><div class="sect2"><h4 class="title">6.9. Tranches de table de hachage</h4><p>
+      De la même façon qu'il existe des tranches pour les tableaux et les listes,
+      il en existe pour les tables de hachage. La sélection s'effectue bien sûr
+      sur les clefs. Par exemple, si <code class="function">%h</code> est une table
+      de hachage, alors <code class="function">@h{'clef1','clef2'}</code> est une liste
+      équivalente à <code class="function">($h{'clef1'},$h{'clef2'})</code>
+      Il est ensuite possible d'utiliser cette liste comme bon vous semble
+      (affectation, passage en paramètre, etc.).
+   </p><p>
+      Une utilisation (assez complexe) des tranches serait indiquée
+      lorsque l'on veut construire
+      automatiquement une liste de valeurs uniques à partir d'un tableau dont
+      on n'est pas sûr que ses valeurs soient uniques :
+   </p><pre class="programlisting">
+	# Un tableau avec des valeurs dupliquées :
+	my @t = qw(hello toto hello vous);
+
+	# Déclaration d'une table de hachage :
+	my %h;
+
+	# On prend la tranche de %h dont les clefs
+	# sont les valeurs du tableau @t
+	# et on leur associe la valeur undef
+	@h{@t} = ();
+
+	# Les clefs de %h sont donc constituées des
+	# valeurs de @t, et on est sûr de ne les
+	# retrouver qu'une seule fois :
+	@t = keys %h;
+</pre><p>
+      Le tableau <code class="function">@t</code> comporte alors une fois et une seule
+      chacun de ses éléments.
+   </p></div>
+</div>
+</pre>
+</details>
+<pre>
+
+
+
+
+<span class="nom_chapitre" id="E/S de base">E/S de base</span>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+	... (texte à venir) ...
+
+
+
+
+<span class="nom_chapitre" id="Opérateurs">Opérateurs</span>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+<table border="1" bgcolor="white">
+	<caption><strong>Assignation</strong></caption>
+	<tr bgcolor="cornflowerblue">
+		<th>Opérateur</th>
+		<th>Signification</th>
+	</tr>
+	<tr>
+		<td>+=</td>
+		<td>addition deux valeurs et stocke le résultat dans la variable (à gauche)</td>
+	</tr>
+	<tr>
+		<td>-=</td>
+		<td>soustrait deux valeurs et stocke le résultat dans la variable</td>
+	</tr>
+	<tr>
+		<td>*=</td>
+		<td>multiplie deux valeurs et stocke le résultat dans la variable</td>
+	</tr>
+	<tr>
+		<td>/=</td>
+		<td>divise deux valeurs et stocke le résultat dans la variable</td>
+	</tr>
+	<tr>
+		<td>.=</td>
+		<td>concatene les deux valeurs et stocke le résultat dans la variable (accepte les chaînes)</td>
+	</tr>
+</table>
+
+
+<table border="1" bgcolor="white">
+	<caption><strong>Incrémentation</strong></caption>
+	<tr bgcolor="cornflowerblue">
+		<th>Opérateur</th>
+		<th>Dénomination</th>
+		<th>Signification</th>
+		<th>Synthaxe</th>
+	</tr>
+	<tr>
+		<td>++</td>
+		<td>incrémentation</td>
+		<td>augmente de 1 la variable</td>
+		<td>$x++</td>
+	</tr>
+	<tr>
+		<td>--</td>
+		<td>décrémentation</td>
+		<td>diminue de 1 la variable</td>
+		<td>$x--</td>
+	</tr>
+</table>
+
+
+<table border="1" bgcolor="white">
+	<caption><strong>Comparaison</strong></caption>
+	<tr bgcolor="cornflowerblue">
+		<th>Signification</th>
+		<th>Numérique</th>
+		<th>Chaîne</th>
+		<th>Commentaire</th>
+	</tr>
+	<tr>
+		<td>égal à</td>
+		<td>==</td>
+		<td>eq</td>
+	</tr>
+	<tr>
+		<td>différent de</td>
+		<td>!=</td>
+		<td>ne</td>
+	</tr>
+	<tr>
+		<td>inférieur à</td>
+		<td><</td>
+		<td>lt</td>
+		<td rowspan="4"><center>chaîne : teste l'ordre alphabétique</center></td>
+	</tr>
+	<tr>
+		<td>inférieur ou égal à</td>
+		<td><=</td>
+		<td>le</td>
+	</tr>
+	<tr>
+		<td>supérieur à</td>
+		<td>></td>
+		<td>gt</td>
+	</tr>
+	<tr>
+		<td>supérieur ou égal à</td>
+		<td>>=</td>
+		<td>ge</td>
+	</tr>
+</table>
+
+
+<table border="1" bgcolor="white">
+	<caption><strong>Opérateurs logiques</strong></caption>
+	<tr bgcolor="cornflowerblue">
+		<th>Signification</th>
+		<th>Numérique</th>
+		<th>Chaîne</th>
+		<th>Commentaire</th>
+	</tr>
+	<tr>
+		<td>négation</td>
+		<td>!</td>
+		<td> </td>
+		<td>sert simplement à inverser une valeur booléenne</td>
+	</tr>
+	<tr>
+		<td>OU logique</td>
+		<td>||</td>
+		<td>or</td>
+		<td>est vérifié si au moins l'une des propositions est vraie</td>
+	</tr>
+	<tr>
+		<td>ET logique</td>
+		<td>&&</td>
+		<td>and</td>
+		<td>est vérifié si toutes les propositions sont vraies</center></td>
+	</tr>
+	<tr>
+		<td>OU exclusif (XOR)</td>
+		<td> </td>
+		<td>xor</td>
+		<td>est vérifié si uniquement 1 des propositions est vraie</center></td>
+	</tr>
+</table>
+
+  <span class="chiffre"><b><u>/!\</u></b></span>   Les opérateurs && et || ont une priorité beaucoup plus forte que les opérateurs and et or.
+
+
+
+
+<span class="nom_chapitre" id="Expressions régulières">Expressions régulières</span>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+	<table border="1" bgcolor="white">
+	<caption><strong>Métacaractères</strong></caption>
+	<tr bgcolor="cornflowerblue">
+		<th>Symbole</th>
+		<th>Signification</th>
+	</tr>
+	<tr>
+		<td>^</td>
+		<td>début de chaîne (ou après toute nouvelle ligne)</td>
+	</tr>
+	<tr>
+		<td>.</td>
+		<td>tout caractère (sauf saut de ligne)</td>
+	</tr>
+	<tr>
+		<td>$</td>
+		<td>fin de chaîne (ou avant toute nouvelle ligne)</td>
+	</tr>
+	<tr>
+		<td>\...</td>
+		<td>rend le caractère suivant littéral</td>
+	</tr>
+	<tr>
+		<td>...|...</td>
+		<td>alternative (correspond à l'un ou à l'autre)</td>
+	</tr>
+	<tr>
+		<td>(...)</td>
+		<td>regroupement (traite comme une unité</td>
+	</tr>
+	<tr>
+		<td>[...]</td>
+		<td>classe de caractères (correspond à un caractère d'un ensemble)</td>
+	</tr>
+</table>
+
+
+<table border="1" bgcolor="white">
+	<caption><strong>Quantificateurs</strong></caption>
+	<tr bgcolor="cornflowerblue">	<th>Symbole</th>	<th>Signification</th>	<th>Type</th></tr>
+	<tr><td>*</td>	<td>0 fois ou plus</td>	<td rowspan="6"><center>gourmand</center></td></tr>
+	<tr><td>+</td>	<td>1 fois ou plus</td></tr>
+	<tr><td>?</td>	<td>0 ou 1 fois</td></tr>
+	<tr><td>{COMPTE}</td>	<td>exactement COMPTE fois</td></tr>
+	<tr><td>{MIN,}</td>	<td>au moins MIN fois</td></tr>
+	<tr><td>{MIN,MAX}</td>	<td>au moins MIN fois, mais pas plus de MAX fois</td></tr>
+	<tr><td>*?</td>	<td>0 fois ou plus</td>	<td rowspan="6"><font color="red" align="center">non</font> gourmand</td></tr>
+	<tr><td>+?</td>	<td>1 fois ou plus</td></tr>
+	<tr><td>??</td>	<td>0 ou 1 fois</td></tr>
+	<tr><td>{MIN,}?</td>	<td>au moins MIN fois</td></tr>
+	<tr><td>{MIN,MAX}?</td>	<td>au moins MIN fois, mais pas plus de MAX fois</td></tr>
+</table>
+
+
+<table border="1" bgcolor="white">
+	<caption><strong>Métasymboles</strong></caption>
+	<tr bgcolor="cornflowerblue">
+		<th>Symbole</th><th>Correspondance</th>	<th>En ASCII</th>	<th>En POSIX</th>	<th>En utf8</th>
+	</tr>
+	<tr>
+		<td>\d</td>
+		<td>numérique</td>
+		<td>[0-9]</td>
+		<td>[:digit:]</td>
+		<td>\p{IsDigit}</td>
+	</tr>
+	<tr>
+		<td>\D</td>
+		<td><font color="red">non</font> numérique</td>
+		<td>[^0-9]</td>
+		<td>[^:digit:]</td>
+		<td>\P{IsDigit}</td>
+	</tr>
+	<tr>
+		<td>\w</td>
+		<td>mots et _</td>
+		<td>[a-zA-Z0-9_]</td>
+		<td>[:word:]</td>
+		<td>\p{IsWord}</td>
+	</tr>
+	<tr>
+		<td>\W</td>
+		<td><font color="red">non</font> mots et _</td>
+		<td>[^a-zA-Z0-9_]</td>
+		<td>[^:word:]</td>
+		<td>\P{IsWord}</td>
+	</tr>
+	<tr>
+		<td>\s</td>
+		<td>espace (blanc)</td>
+		<td>[ \r\t\n\f]</td>
+		<td>[:space:]</td>
+		<td>\p{IsSpace}</td>
+	</tr>
+	<tr>
+		<td>\S</td>
+		<td><font color="red">non</font> espace</td>
+		<td>[^ \r\t\n\f]</td>
+		<td>[^:space:]</td>
+		<td>\P{IsSpace}</td>
+	</tr>
+	<tr>
+		<td>\t</td>
+		<td>tabulation</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\n</td>
+		<td>saut de ligne (NL, CR sur MAC)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\r</td>
+		<td>retour chariot (CR, NL sur MAC)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\b</td>
+		<td>espace arrière (BS) & vrai à une limite de mot</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\B</td>
+		<td>vrai <font color="red">hors</font> d'une limite de mot</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\<i>n</i></td>
+		<td><i>n</i><sup>ème</sup> chaîne capturée (en décimal)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\x{<i>abcd</i>}</td>
+		<td>caractère donné en hexadécimal</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\<i>NNN</i></td>
+		<td>caractère donné en octal, jusqu'à \377</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\e</td>
+		<td>échappement (ASCII ESC)</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\l</td>
+		<td>passe le prochain caract seulement en minuscules</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\L</td>
+		<td>minuscules jusqu'au prochain \E</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\E</td>
+		<td>termine la traduction de casse (\L,\U) ou citation de métacaractères</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\u</td>
+		<td>passe le prochain caract seulement en majuscules</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+	<tr>
+		<td>\U</td>
+		<td>majuscules jusqu'au prochain \E</td>
+		<td>-</td>
+		<td>-</td>
+		<td>-</td>
+	</tr>
+</table>
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Recherche et modifications de motifs">Recherche et modifications de motifs</font></b></u></p>		<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+<b><font size=3>> Recherche <</font></b>
+
+  exemples :
+	/(\d)(\d)/		<span class="commentaire"># trouve deux chiffres, quui sont capturés dans $1 et $2</span>
+	/(\d+)/		<span class="commentaire"># trouve un ou plusieurs chiffres, capturés ensembles dans $1</span>
+	/(\d)+)/		<span class="commentaire"># trouve un chiffre une fois ou plus, et capture le dernier dans $1</span>
+	/x{8}/		<span class="commentaire"># trouve le caractère x répété 8 fois</span>
+	/\d{5,}/		<span class="commentaire"># trouve un chiffre 5 fois ou plus, capturés dans $1</span>
+	/x{2,3}/		<span class="commentaire"># trouve le caractère x 2 ou 3 fois maximum</span>
+
+	pour $_ = "a xxx c xxxxxxxx c xxx d";
+		/a.*c.*d/;			<span class="commentaire"># le premier << .* >> prend tous caractères jusqu'au 2eme c</span>
+		/a.*?c.*d/;		<span class="commentaire"># ici << a.*?c >> prend tous caractères jusqu'au 1er c</span>
+
+	pour :
+		< font color="#0000FF">my< /font > < font color="#FF9900">$error< /font >
+		< font color="#0000FF">(.*?)< /font >		<span class="commentaire"># prend tous caractères jusqu'au 1er < /font ></span>
+
+
+<b><font size=3>> Substitutions par s/motif/chaîne/ < </font></b>
+
+<table border="1" bgcolor="white">
+	<caption><strong>Modificateurs</strong></caption>
+	<tr bgcolor="cornflowerblue">
+		<th>Modificateurs</th>
+		<th>Signification</th>
+	</tr>
+	<tr>
+		<td>/i</td>
+		<td>ignore la casse des caractères</td>
+	</tr>
+	<tr>
+		<td>/m</td>
+		<td>permet à ^ et $ de fonctionner à côté d'un \n</td>
+	</tr>
+	<tr>
+		<td>/s</td>
+		<td>permet au . de détecter des sauts de lignes et ignore la variable obsolète $*</td>
+	</tr>
+	<tr>
+		<td>/x</td>
+		<td>ignore (presque tous) les blancs et permet les commentaires à l'intérieur du motif</td>
+	</tr>
+	<tr>
+		<td>/o</td>
+		<td>compile le motif une seule fois</td>
+	</tr>
+	<tr>
+		<td>/g</td>
+		<td>remplacement global, cad toutes les occurences</td>
+	</tr>
+	<tr>
+		<td>/e</td>
+		<td>évalue la partie droite comme une expression</td>
+	</tr>
+</table>
+
+   exemples :
+	  <span class="variable">$_</span> = <span class="texte">"foot fool buffoon"</span>;
+	   s/foo/bar/g;		<span class="commentaire"># $_ contient maintenant "bart barl bufbarn"</span>
+
+	   <span class="variable">$_</span> = <span class="texte">"hello, world"</span>;
+	   <span class="variable">$new</span> = <span class="texte">"goodbye"</span>;
+	   s/hello/$new/;		<span class="commentaire"># remplace hello par goodbye</span>
+
+	   <span class="variable">$_</span> = <span class="texte">"this is a test";</span>
+	   s/(\w+)/¤$1¤/g;		<span class="commentaire"># contient maintenant "¤this¤ ¤is¤ ¤a¤ ¤test¤"</span>
+
+	   s#fred#barney#;	<span class="commentaire"># équivaut à   s/fred/barney/; --> peut eviter la confusion si trop de \/ dans la chaîne</span>
+
+	   
+
+<b><font size=3>> Coupure par split(/motif/,chaîne) < </font></b>
+
+   exemples :
+	   <span class="variable">$line</span> = <span class="texte">"merlyn::118:10:Randal:/home/merlyn:/usr/bin/perl"</span>;
+	   <span class="tableau">@fields</span> = <span class="fonction">split</span>(<span class="texte">/:/</span>,<span class="variable">$line</span>);		<span class="commentaire"># divise $line en utilisant : comme séparateur</span>
+					<span class="commentaire"># à présent @fields contient ("merlyn","","118","10","Randal","/home/merlyn","/usr/bin/perl")</span>					
+	   (<span class="variable">$name</span>,<span class="variable">$password</span>,<span class="variable">$uid</span>,<span class="variable">$gid</span>,<span class="variable">$gcos</span>,<span class="variable">$home</span>,<span class="variable">$shell</span>) = <span class="fonction">split</span>(<span class="texte">/:/</span>,<span class="variable">$line</span>);
+
+
+
+<b><font size=3>> Concaténation par join(caractère,chaîne) <</font></b>
+
+   exemples :
+       <span class="variable">$outline</span> = <span class="fonction">join</span>(<span class="texte">":"</span>, <span class="tableau">@fields</span>);
+
+
+	   
+<p style="float: left;"><u><b><font size=4 id="Diverses">Diverses</font></b></u></p></br>		<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+	<b><font size=2>> Conversion scalaire en entier (prédicats) <</font></b>
+
+	<span class="fonction">my</span> <span class="variable">$a</span> = 2;
+	<span class="fonction">my</span> <span class="variable">$b</span> = 4;
+	<span class="commentaire"># La fonction "int" permet de convertir explicitement un scalaire en un nombre entier.</span>
+	<span class="fonction">print</span> <span class="texte">"$a < $b  : "</span> . int (<span class="variable">$a</span> < <span class="variable">$b</span>) . <span class="texte">"\n"</span>;
+		2 < 4  : 1
+	<span class="fonction">print</span> <span class="texte">"$a > $b  : "</span> . int (<span class="variable">$a</span> > <span class="variable">$b</span>) . <span class="texte">"\n"</span>;
+		2 > 4  : 0
+	<span class="fonction">print</span> <span class="texte">"'cool' lt 'coolympique' : "</span> . int('cool' lt 'coolympique') . <span class="texte">"\n"</span>;
+	<span class="fonction">print</span> <span class="texte">"'C' gt 'Perl' : "</span> . int('C' lt 'Perl') . <span class="texte">"\n"</span>;
+		'cool' lt 'coolympique' : 1
+		'C' gt 'Perl' : 0
+
+
+	<b><font size=2>> Longueur d'une chaîne <</font></b>
+
+	<span class="fonction">my</span> <span class="variable">$chaine</span> = <span class="texte">"coolympique"</span>;
+	<span class="fonction">my</span> <span class="variable">$longueur</span> = length <span class="variable">$chaine</span>; 		<span class="commentaire"># renvoie la nbr de caractère de la chaine</span>
+
+
+	<b><font size=2>> seek : sauter des informations <</font></b>
+	saute des caractères d'un fichier donné.
+
+	<b><font size=2>> tell : relire des informations <</font></b>
+	récupère la distance (en carcatères) qui sépare le début du fichier de la position courante dans le fichier.
+	la position courante est l'emplacement de la ligne qui va être lue.
+
+_____________________________________________________________________________________________________________________________________________________________________________________
+
+<h2>Syntaxes blocs</h2>
+<p style="float: left;"><u><b><font size=4 id="Création fichier de sortie">Création fichier de sortie</font></b></u></p>		<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+<span class="variable">$fout</span>=<span class="texte">"result_extract.txt"</span>;	<span class="commentaire"># nom du fichier de sortie</span>
+<span class="fonction">open</span>(<span class="chiffre"><em>OUT</em></span>,<span class="texte">">$fout"</span>);		<span class="commentaire"># ouverture fichier</span>
+<span class="fonction">print</span> <span class="chiffre"><em>OUT</em></span> <span class="texte">"$i\n"</span>;		<span class="commentaire"># écriture de la valeur de $i dans le fichier</span>
+<span class="fonction">close</span> <span class="chiffre"><em>OUT</em></span>;		<span class="commentaire"># fermeture du fichier</span>
+
+
+<p style="float: left;"><u><b><font size=4 id="Définition du format de sortie">Définition du format de sortie</font></b></u></p>		<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+s'insère vers la fin du script.  <span class="chiffre"><b><u>/!\</u></b> ne pas oublier le '.' en dernière ligne <b><u>/!\</u></b></span>
+
+<b><font size=2>format général de sortie :</font></b>
+<span class="fonction">format</span> STDOUT =		<span class="commentaire"># STDOUT ou nom du handle du fic de sortie (ex : OUT)</span>
+@<<<<<<<<<<<< @<<<<<< @<<<<<<<<<<<
+$filename, $name, $word
+.
+
+<b><font size=2>ajouter un titre aux colonnes :</font></b>
+<span class="fonction">format</span> STDOUT_TOP =	<span class="commentaire"># STDOUT_TOP ou nom du handle du fic de sortie (ex : OUT_TOP)</span>
+Page @<<
+$%
+
+Filename      Name    Word
+============= ======= ============
+.
+
+<b><font size=2>rappeler le format dans le script :</font></b>
+<span class="fonction">foreach</span> (<span class="tableau">@TAB</span>) {
+    <span class="variable">$filename</span> = <span class="variable">$TAB</span>[<span class="chiffre">0</span>];
+    <span class="variable">$name</span> = <span class="variable">$TAB</span>[<span class="chiffre">5</span>];
+    <span class="variable">$word</span> = <span class="variable">$TAB</span>[<span class="chiffre">6</span>];
+    write;		<span class="commentaire"># écrit vers STDOUT selon le format désiré</span>
+    		<span class="commentaire"># write OUT;  écrira vers OUT</span>
+}
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Créer un fichier temporaire proprement">Créer un fichier temporaire proprement</font></b></u></p>		<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+<span class="fonction">use</span> File::Temp qw/ tempfile /;
+<span class="commentaire"># Création d'un fichier temporaire qui sera supprimé une fois le script terminé.</span>
+<span class="commentaire"># N'oubliez pas les 4 XXXX, perl créera un fichier avec à la place des X des caractères aléatoires.</span>
+<span class="fonction">my</span> (<span class="variable">$fh_temp</span>, <span class="variable">$file_temp</span>) = tempfile(<span class="texte">"fichier_temporaireXXXX"</span>, UNLINK => <span class="chiffre">1</span>); 
+<span class="fonction">close</span>(<span class="variable">$fh_temp</span>);	<span class="commentaire"># fermeture du fichier temporaire</span>
+
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Lire la première ligne d'un fichier">Lire la première ligne d'un fichier</font></b></u></p>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+	<span class="fonction">open</span>(<span class="chiffre"><em>FIC</em></span>,<span class="texte">"/tmp/cocX98__0451_0500.coc"</span>);	<span class="commentaire"># ouverture fichier</span>
+	<span class="fonction">my</span> <span class="variable">$li1</span> = < <span class="chiffre"><em>FIC</em></span> > ;
+	<span class="fonction">print</span> <span class="variable">$li1</span> ;
+	<span class="fonction">close</span> <span class="chiffre"><em>FIC</em></span>;					<span class="commentaire"># fermeture du fichier</span>
+
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Rangement de fichier dans un tableau">Rangement de fichier dans un tableau</font></b></u></p>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+
+<b><font size=3> méthode 1 (via sous-programe)</font></b>
+	<span class="fonction">open</span>(<span class="chiffre"><em>FIC</em></span>,<span class="texte">"/tmp/cocX98__0451_0500.coc"</span>);	<span class="commentaire"># ouverture fichier</span>
+	<span class="fonction">while</span> (< <span class="chiffre"><em>FIC</em></span> >) {
+	    <span class="fonction">push</span>(<span class="tableau">@CONTENU</span>, <span class="variable">$_</span>);
+	}
+	<span class="fonction">close</span> <span class="chiffre"><em>FIC</em></span>;					<span class="commentaire"># fermeture du fichier</span>
+
+<b><font size=3> méthode 2 (directe mais déconseillée)</font></b>
+	<span class="fonction">open</span>(<span class="chiffre"><em>FIC</em></span>,<span class="texte">"/tmp/cocX98__0451_0500.coc"</span>);	<span class="commentaire"># ouverture fichier</span>
+	<span class="tableau">@TABL_FIC</span>=< <span class="chiffre"><em>FIC</em></span> >;				<span class="commentaire"># affectation dans tableau</span>
+	<span class="fonction">close</span> <span class="chiffre"><em>FIC</em></span>;					<span class="commentaire"># fermeture du fichier</span>
+
+  <span class="chiffre"><b><u>/!\</u></b></span>   Attention   la deuxième méthode est plus rapide mais déconseillée !!!
+          elle semble valable uniquement si on ne fait aucun traitement dessus par la suite.
+
+
+   exemples :
+	<span class="fonction">sub</span> <font color="#663300">lire_contenu</font> {
+	    <span class="fonction">my</span> <span class="variable">$inFile</span> = <span class="fonction">shift</span>;
+	    <span class="fonction">my</span> <span class="tableau">@CONTENU</span> = (); 
+	    <span class="fonction">if</span>(!<span class="fonction">open</span>(<span class="chiffre"><em>FICHIER</em></span>, <span class="texte">"$inFile"</span>)) {
+	        <font color="#663300">&afficher_erreur </font>(<span class="texte">"Impossible d'ouvrir $inFile : $!"</span>);
+	        <span class="fonction">return</span>(<span class="tableau">@CONTENU</span>) ;
+	    }
+	    <span class="commentaire">#@CONTENU = < FICHIER >;</span>
+	    <span class="fonction">while</span> (< <span class="chiffre"><em>FICHIER</em></span> >) {
+	        <span class="fonction">push</span>(<span class="tableau">@CONTENU</span>, <span class="variable">$_</span>);
+	    }
+	    <span class="fonction">chomp</span> <span class="tableau">@CONTENU</span>;
+	    <span class="fonction">close</span>(<span class="chiffre"><em>FICHIER</em></span>);
+	    <span class="fonction">return</span>(<span class="tableau">@CONTENU</span>);		<span class="commentaire"># renvoi du tableau</span>
+	}
+
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Extraction de données du tableau">Extraction de données du tableau</font></b></u></p>		<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+
+<span class="fonction">foreach</span> (<span class="tableau">@TABL_FIC</span>) {
+    <span class="tableau">@c</span> = split(<span class="texte">"\t"</span>,<span class="variable">$_</span>);		<span class="commentaire"># rangement des donnees separees par tabulation dans un autre tableau</span>
+    <span class="tableau">@d</span> = split(<span class="texte">/;/</span>,<span class="variable">$_</span>);			<span class="commentaire"># rangement des donnees separees par ; dans un autre tableau</span>
+    <span class="tableau">@e</span> = split(<span class="texte">/\./</span>,<span class="texte">"nom_de_fichier.log"</span>);	<span class="commentaire"># coupure du nom par . et 2 valeurs envoyées dans un autre tableau</span>
+    <span class="variable">$nump</span> = <span class="variable">$c</span>[<span class="chiffre">7</span>];			<span class="commentaire"># $nump prend la 8<sup>ème</sup> valeur du tableau @c</span>
+}
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Test existence valeur dans tableau/liste">Test existence valeur dans tableau/liste</font></b></u></p>		<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+
+<span class="tableau">@ext</span> = qw(mp3 aac m4a wma aiff aac flac wav);
+<span class="variable">$extfic</span> = <span class="variable">$_</span>;
+<span class="fonction">if</span> (<span class="texte">"@ext"</span> =~ /$_/) {		<span class="commentaire"># test si $_ fait parti de la liste restrictive</span>
+    print <span class="texte">"$_ est ok\n"</span>;
+}
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Suppression d'une ou plusieurs valeurs d'un tableau">Suppression d'une ou plusieurs valeurs d'un tableau</font></b></u></p>		<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+
+<span class="tableau">@hash</span> = qw(foo bar baz);
+<span class="tableau">@hash</span> = <span class="fonction">grep</span> { <span class="variable">$_</span> <span class="fonction">ne</span> <span class="texte">"bar"</span> } <span class="tableau">@hash</span>;		<span class="commentaire"># supprime "bar" du tableau</span>
+ 
+
+
+<p style="float: left;"><u><b><font size=4 id="Suppression des espaces créés par 'push'">Suppression des espaces créés par 'push'</font></b></u></p>		<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+
+<span class="fonction">foreach</span> (<span class="tableau">@PmViaLocationOperation</span>) {
+    <span class="texte">s/^\s(.*)$//g</span>;
+    <span class="fonction">print</span> PPD_COMPOUNDOPERATION <span class="texte">"$_"</span>;
+}
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Suppression des doublons d'un tableau">Suppression des doublons d'un tableau</font></b></u></p>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+
+Il existe différentes méthodes pour supprimer les doublons dans une liste (un tableau) en perl. La première
+méthode consiste à utiliser un module Perl. C'est bien évidemment la méthode la plus recommandée car
+les modules disponibles sur le CPAN sont efficaces et bien écrits.
+Voici une liste de modules intéressants :
+	. List::MoreUtils
+	. List::Util
+	. List::Uniq
+
+La seconde méthode revient à ne pas utiliser de modules et coder soit même. Voici 3 procédures élégantes
+qui permettent de supprimer les doublons d'un tableau. Comparons les.
+
+<b><font size=3> méthode 1 (hash anonyme)</font></b>
+Cette procédure prend en argument une référence d'un tableau et chaque case du tableau devient une clé
+d'un hash anonyme. Les clés de la table de hachage sont renvoyées.
+
+<span class="commentaire">#!/usr/bin/perl</span>
+<span class="fonction">use</span> strict;
+<span class="fonction">use</span> warnings;
+<span class="fonction">sub</span> <font color="#663300">doublons_hash_anonyme</font> {
+    <span class="fonction">my</span> (<span class="variable">$ref_tabeau</span>) = <span class="tableau">@_</span>;
+    <span class="fonction">return keys</span> <font color="#8080FF">%</font>{{<span class="fonction">map</span> {<span class="variable">$_</span> => <span class="chiffre">1</span>} <span class="tableau">@</span>{<span class="variable">$ref_tabeau</span>}}};
+}
+
+<b><font size=3> méthode 2 (tranche)</font></b>
+Cette procédure prend en argument une référence d'un tableau et chaque case du tableau devient la clé
+d'une tranche de hachage d'un hachage qu'on aura déclaré.
+
+<span class="commentaire">#!/usr/bin/perl</span>
+<span class="fonction">use</span> strict;
+<span class="fonction">use</span> warnings;
+<span class="fonction">sub</span> <font color="#663300">doublons_tranche</font> {
+    <span class="fonction">my</span> (<span class="variable">$ref_tabeau</span>) = <span class="tableau">@_</span>;
+    <span class="fonction">my</span> <font color="#8080FF">%hash_sans_doublon</font>; 		<font color="#009900">#<em> Comme un hash ne peut pas avoir deux clés identiques,</em>
+				#<em> utilser ces clé permet d'avoir un tableau unique</em></font>
+    <span class="tableau">@hash_sans_doublon</span> {<span class="tableau">@</span>{<span class="variable">$ref_tabeau</span>}} = ();
+	<font color="#009900">#<em> Pas besoin de surcharger le hash avec des valeurs inutiles</em>
+	#<em> et ensuite, on renvoie le tableau des clés uniques</em></font>
+    <span class="fonction">return keys</span> <font color="#8080FF">%hash_sans_doublon</font>;
+}
+
+<b><font size=3> méthode 3 (grep)</font></b>
+Cette procédure prend en argument une référence d'un tableau et chaque case est passée au filtre grep qui
+ne conserve que celles qui n'ont pas déjà été vues.
+
+<span class="commentaire">#!/usr/bin/perl</span>
+<span class="fonction">use</span> strict;
+<span class="fonction">use</span> warnings;
+<span class="fonction">sub</span> <font color="#663300">doublons_grep</font> {
+    <span class="fonction">my</span> (<span class="variable">$ref_tabeau</span>) = <span class="tableau">@_</span>;
+    <span class="fonction">my</span> <font color="#8080FF">%hash_sans_doublon</font>;
+    <span class="fonction">return grep</span> {!<span class="variable">$hash_sans_doublon</span>{<span class="variable">$_</span>}++} <span class="tableau">@</span>{<span class="variable">$ref_tabeau</span>};
+}
+
+<b><font size=2>. Avantages et inconvénients</font></b>
+Pour de plus amples manipulations de tableaux, il est recommander d'utiliser les modules CPAN.
+List::Util est dans le CORE de perl depuis sa version 5.8.
+La technique 2(à coup de tranche) est la plus rapide des 3, ensuite vient la technique 3 (à coup de grep),
+puis vient la technique 1.
+Autres remarques :
+- La technique 2 (tranche) est plus avantageuse que la 1 car elle n'a pas besoin de créer une liste
+intermédiaire.
+- Notez bien que seule la technique 3 (grep) permet de conserver l'ordre des éléments du tableau après
+suppression des doublons (important selon vos besoins) ! Sachez que la différence de temps entre la 2 et 3
+n'est pas non plus dramatique. Utilisez le module Benchmark pour effectuer vos tests si vous le souhaitez.
+
+
+ <b>Exemple d'utilisation :</b>
+
+<span class="commentaire">#!/usr/bin/perl</span>
+<span class="fonction">use</span> strict;
+<span class="fonction">use</span> warnings;
+<span class="fonction">my</span> <span class="tableau">@listing_mots</span> = qw/ moi 2Eurocents Woufeil toi djibril Jedai moi Jedai gldavid
+  etc Jedai Stoyak lui nous tous je tu elle lui perl 10 20 20 30 8 6 9 100
+  /;
+<span class="fonction">my</span> <span class="tableau">@resultat1</span> = <font color="#663300">doublons_hash_anonyme</font>( \<span class="tableau">@listing_mots</span> );
+<span class="fonction">my</span> <span class="tableau">@resultat2</span> = <font color="#663300">doublons_tranche</font>( \<span class="tableau">@listing_mots</span> );
+<span class="fonction">my</span> <span class="tableau">@resultat3</span> = <font color="#663300">doublons_grep</font>( \<span class="tableau">@listing_mots</span> );
+<span class="fonction">print</span> <span class="texte">"Original : @listing_mots\n"</span>;
+<span class="fonction">print</span> <span class="texte">"HASH anonyme : @resultat1\n"</span>;
+<span class="fonction">print</span> <span class="texte">"Tranche : @resultat2\n"</span>;
+<span class="fonction">print</span> <span class="texte">"GREP : @resultat3\n"</span>;
+
+
+<b><u>Résultat :</u></b>
+<b>Original</b> : moi 2Eurocents Woufeil toi djibril Jedai moi Jedai gldavid etc Jedai Stoyak lui nous tous je tu elle lui perl 10 20 20 30 8 6 9 100
+<b>HASH anonyme</b> : djibril toi je gldavid etc tu Woufeil 30 100 moi 6 Jedai 9 20 8 2Eurocents perl tous lui Stoyak elle 10 nous
+<b>Tranche</b> : djibril toi je gldavid etc tu Woufeil 30 100 moi 6 Jedai 9 20 8 2Eurocents perl tous lui Stoyak elle 10 nous
+<b>GREP</b> : moi 2Eurocents Woufeil toi djibril Jedai gldavid etc Stoyak lui nous tous je tu elle perl 10 20 30 8 6 9 100
+On peut constater que l'ordre est conservé pour la technique 3.
+   
+
+
+<p style="float: left;"><u><b><font size=4 id="Utiliser des noms de fichiers ou répertoires portables">Utiliser des noms de fichiers ou répertoires portables</font></b></u></p>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+use File::Spec;
+ 
+my $repertoire     = 'C:\repertoire';
+my $nom_fichier    = 'fichier.txt';
+my $chemin_fichier = File::Spec->catfile($repertoire, $nom_fichier);
+print $repertoire,"\n";
+ 
+my $chemin_repertoire = File::Spec->catdir('\test', 'tmp', 'dossier');
+print $chemin_repertoire,"\n";
+
+Résultat sous Windows
+	C:\repertoire
+	\test\tmp\dossier
+
+Résultat sous Linux/Mac
+	C:/repertoire
+	/test/tmp/dossier
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Utiliser des variables d'environnement DOS">Utiliser des variables d'environnement DOS</font></b></u></p>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+<b>Recherche par liste complète des variable d'environnement :</b>
+<span class="fonction">foreach my</span> <span class="variable">$nom_cle</span> (keys <font color="#8080FF">%ENV</font>) {
+	<span class="fonction">print</span> <span class="texte">"$nom_cle : $ENV{$nom_cle}\n"</span>;
+}
+
+<b>Recherche par la variable d'environnement spécifique :</b>
+<span class="fonction">print</span> <span class="texte">"Exemple: mon HOMESHARE = $ENV{HOMESHARE}\n"</span>;
+<span class="fonction">print</span> <span class="texte">"Exemple: mon HOME (\%HOMEDRIVE\%\%HOMEPATH\%) = $ENV{HOMEDRIVE}$ENV{HOMEPATH}\n"</span>;
+<span class="fonction">print</span> <span class="texte">"Exemple: mon HOME (\%HOME\%) = $ENV{HOME}\n"</span>;
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Forcer dates d'un fichier">Forcer dates d'un fichier</font></b></u></p>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+<span class="fonction">use</span> Win32API::File::Time qw{:win};
+(<span class="variable">$atime</span>, <span class="variable">$mtime</span>, <span class="variable">$ctime</span>) = <span class="fonction">GetFileTime</span> (<span class="variable">$filename</span>);
+<span class="fonction">SetFileTime</span> (<span class="variable">$filename</span>, <span class="variable">$atime</span>, <span class="variable">$mtime</span>, <span class="variable">$ctime</span>);
+<span class="commentaire"># utime ne modifie que $mtime et $atime</span>
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Requête en base Oracle">Requête en base Oracle</font></b></u></p>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+
+<span class="commentaire"># definition environnement ORACLE </span>
+<span class="fonction">if</span> ( <font color="#FF9900">$^O</font> <span class="fonction">eq</span> <span class="texte">'MSWin32'</span> ) {
+    <span class="fonction">use</span> constant ORACLE_HOME => <span class="texte">"T:\\logiciel\\oracle\\ora81\\"</span>;
+    <span class="variable">$ENV</span>{TNS_ADMIN}=ORACLE_HOME.<span class="texte">"network\\ADMIN"</span>;
+    <span class="variable">$ENV</span>{ORACLE_HOME}=ORACLE_HOME;
+    <span class="variable">$ENV</span>{PATH}=<span class="variable">$ENV</span>{PATH}.<span class="texte">";"</span>.ORACLE_HOME.<span class="texte">'bin'</span>;
+} <span class="fonction">else</span> {
+    <span class="variable">$ENV</span>{ORACLE_HOME}=<span class="texte">"/logiciel/oracle_client_10203"</span>;
+    <span class="variable">$ENV</span>{TNS_ADMIN}=<span class="texte">"/logiciel/oracle_mgr/tnsadmin"</span>;
+}
+   
+<span class="fonction">use</span> lib <span class="texte">"//home//bdROBCAD//robdits_support_1//p050497//PRG//EN_COURS//PERL//Lib_Modules"</span>;
+<span class="fonction">use</span> modules_laurent_u;
+
+	<b><font size=3>--> exemple 1</font></b>
+	 
+    <span class="commentaire"># definition de la chaine de connexion   (infos dispos en editant le fichier /logiciel/oracle_mgr/tnsadmin/tnsnames.ora)</span>
+<span class="variable">$c1</span>=<span class="texte">"dbi:Oracle:host=gdcopeo01.ava.tcr.renault.fr;port=1529;sid=r2o30"</span>;
+
+    <span class="commentaire"># déclaration user/pass</span>
+<span class="variable">$u1</span>=<span class="texte">"gcell_prop"</span>;
+
+    <span class="commentaire"># construction de la requete</span>
+<span class="variable">$r1</span>=qq{select id_site_pk from T_I01_ROBCAD_SITES where (site='$site')};
+
+    <span class="commentaire"># execution de la requete</span>
+<span class="fonction">my</span> <span class="tableau">@outR1</span>=<font color="#663300">&requete_oracle </font>(<span class="variable">$c1</span>,<span class="variable">$u1</span>,<span class="variable">$u1</span>,<span class="variable">$r1</span>);
+<span class="fonction">my</span> (<span class="variable">$result</span>)=<span class="fonction">split</span>(<span class="texte">/;/</span>,<span class="variable">$outR1</span>[<span class="chiffre">0</span>]);
+
+
+	<b><font size=3>--> exemple 2</font></b>
+
+    <span class="commentaire"># definition de la chaine de connexion</span>
+<span class="variable">$c1</span>=<span class="texte">"dbi:Oracle:host=bvuopeo01.ava.tcr.renault.fr;port=1527;sid=bvuao"</span>;
+
+    <span class="commentaire"># déclaration user/pass</span>
+<span class="variable">$u1</span>=<span class="texte">"gom_user"</span>;
+
+    <span class="commentaire"># construction de la requete</span>
+<span class="variable">$r1</span>=qq{select X4A_INFO_DOSSIER.X4AIDINFODOS,X4A_INFO_DOSSIER.X4ANUMERO,X4V_SOUSDOS.X4VNOM,X4V_SOUSDOS.X4VINDPROC,
+X4V_SOUSDOS.X4VIDSOUSDOS,X4A_INFO_DOSSIER.X4AID_PROJ,X4A_INFO_DOSSIER.X4ADESPC,X4A_INFO_DOSSIER.X4AINDPROD,
+A13_TYPE_DOSSIER.A13LIBELLE,X4A_INFO_DOSSIER.X4AMTC
+FROM GOM_ADM.X4A_INFO_DOSSIER,GOM_ADM.X4Y_LIEN_SOUSDOS,GOM_ADM.X4V_SOUSDOS,GOM_ADM.X47_FOLIO,GOM_ADM.X46_NMPLAN,
+GOM_ADM.X4B_PIEDOS,A13_TYPE_DOSSIER
+where (X4A_INFO_DOSSIER.X4AIDINFODOS = X4Y_LIEN_SOUSDOS.X4YIDDOS)
+AND (X4Y_LIEN_SOUSDOS.X4YIDSOUSDOS = X4V_SOUSDOS.X4VIDSOUSDOS)
+AND (X47_FOLIO.X47IDSOUSDOS = X4V_SOUSDOS.X4VIDSOUSDOS)
+AND (X47_FOLIO.X47IDENT2 = X46_NMPLAN.X46IDENT2)
+AND (X4A_INFO_DOSSIER.X4AIDINFODOS = X4B_PIEDOS.X4BIDDOS)
+AND (A13_TYPE_DOSSIER.A13ID = X4A_INFO_DOSSIER.X4AID_TYPE_DOSSIER)
+AND (X4A_INFO_DOSSIER.X4AIDINFODOS = 'E668130')
+GROUP BY X4A_INFO_DOSSIER.X4AIDINFODOS,X4A_INFO_DOSSIER.X4ANUMERO,X4V_SOUSDOS.X4VNOM,X4V_SOUSDOS.X4VINDPROC,X4V_SOUSDOS.X4VIDSOUSDOS,
+X4A_INFO_DOSSIER.X4AID_PROJ,X4A_INFO_DOSSIER.X4ADESPC,X4A_INFO_DOSSIER.X4AINDPROD,A13_TYPE_DOSSIER.A13LIBELLE,X4A_INFO_DOSSIER.X4AMTC
+ORDER BY X4V_SOUSDOS.X4VNOM  DESC,X4A_INFO_DOSSIER.X4AIDINFODOS,X4A_INFO_DOSSIER.X4ANUMERO,X4V_SOUSDOS.X4VIDSOUSDOS,
+X4V_SOUSDOS.X4VNOM,X4V_SOUSDOS.X4VINDPROC,X4A_INFO_DOSSIER.X4AID_PROJ,X4A_INFO_DOSSIER.X4ADESPC,
+X4A_INFO_DOSSIER.X4AINDPROD,A13_TYPE_DOSSIER.A13LIBELLE,X4A_INFO_DOSSIER.X4AMTC};
+
+    <span class="commentaire"># execution de la requete</span>
+<span class="fonction">my</span> <span class="tableau">@outR1</span>=<font color="#663300">&requete_oracle </font>(<span class="variable">$c1</span>,<span class="variable">$u1</span>,<span class="variable">$u1</span>,<span class="variable">$r1</span>);
+<span class="fonction">my</span> (<span class="variable">$result</span>)=<span class="fonction">split</span>(<span class="texte">/;/</span>,<span class="variable">$outR1</span>[<span class="chiffre">0</span>]);
+
+
+
+
+<p style="float: left;"><u><b><font size=4 id="Envoi de mail">Envoi de mail</font></b></u></p>	<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+	<b><font size=3>--> exemple 1</font></b>
+
+<span class="fonction">use</span> MIME::Lite;						<span class="commentaire"># chargement module <a href="http://search.cpan.org/search?query=mime%3Alite&mode=all" title="Lien de recherche dans le CPAN">MIME-Lite</a></span>
+<span class="variable">$msg</span> = MIME::Lite->new(
+    From	=> <span class="texte">'soldat_pithiviers@la7emecompagnie.org'</span>,
+    To	=> <span class="texte">'soldat_tassin@la7emecompagnie.org'</span>,
+    Cc	=> <span class="texte">'quelqun@renault.com, lautre@hotmail.com'</span>,
+    Bcc	=> <span class="texte">'soldat_inconnu@renault.com'</span>,
+    Subject => <span class="texte">"-- La tenaille --"</span>,
+    Data	=> <span class="texte">"Voici ce que je t'avais envoyé...\n\n\n Dommage il [...] Soldat Pithiviers."</span>
+);
+<span class="variable">$msg</span>->send_by_smtp('wsmtp.mc2.renault.fr');
+
+
+	<b><font size=3>--> exemple 2</font></b>
+
+<span class="fonction">use</span> MIME::Lite;
+<span class="variable">$subject</span> = <span class="texte">"ALERTE quota sur la zone '$qtree'"</span>;
+<span class="variable">$text</span> = <span class="texte"></span>;
+<span class="variable">$msg</span> = MIME::Lite->new(
+    From	=> <span class="texte">'soldat_pithiviers@la7emecompagnie.org'</span>,
+    To	=> <span class="texte">'soldat_tassin@la7emecompagnie.org'</span>,
+    Cc	=> <span class="texte">'quelqun@renault.com, lautre@hotmail.com'</span>,
+    Bcc	=> <span class="texte">'soldat_inconnu@renault.com'</span>,
+    Subject => <span class="texte">"$subject"</span>,
+    Data => <span class="texte">qq{< body >
+                < p >Fais gaffe p'tit gars je t'ai à l'oeil !< br />
+                < i >Fantomas< /i >< br/ >
+                < img src="\\\\f-renoutet\\home3\$\\p050497\\MyDocs\\00_PERSONNEL_OLIVIERARNOULD\\My_Pictures\\Fantomas.jpg">< / p ></ body ></ span >
+        }</span>,
+);
+<span class="variable">$msg</span>->send;
+
+
+	<b><font size=3>--> exemple 3</font></b>
+  
+<span class="fonction">use</span> MIME::Lite;
+<span class="variable">$subject</span> = <span class="texte">"-- La tenaille --"</span>;
+<span class="variable">$text</span> = <span class="texte">"Voici ce que je t'avais envoyé...\n\n\n Dommage il [...] Soldat Pithiviers."</span>;
+<span class="variable">$msg</span> = MIME::Lite->new(
+    From	=> <span class="texte">'soldat_pithiviers@la7emecompagnie.org'</span>,
+    To	=> <span class="texte">'soldat_tassin@la7emecompagnie.org'</span>,
+    Cc	=> <span class="texte">'quelqun@renault.com, lautre@hotmail.com'</span>,
+    Bcc	=> <span class="texte">'soldat_inconnu@renault.com'</span>,
+    Subject => <span class="texte">"Msg avec PJ"</span>,
+    Type	=> <span class="texte">'TEXT'</span>,
+    Data	=> <span class="texte">"Comme convenu..."</span>
+);
+<span class="variable">$msg</span>->attach(
+    Type     =><span class="texte">'image/gif'</span>,
+    Path     =><span class="texte">'aaa000123.gif'</span>,
+    Filename =><span class="texte">'plan_attaque.gif</span>'
+);
+<span class="variable">$msg</span>->attr(content-type =><span class="texte">'text/html; charset=iso-8859-1'</span>);
+<span class="variable">$msg</span>->send;
+
+Exemple pour fichier Excel :
+<span class="variable">$msg</span>->attach(
+    Type     =><span class="texte">'application/xlsx'</span>,
+    Path     =><span class="texte">'My_Docs\fichierExcel.xlsx'</span>,
+    Filename =><span class="texte">'fichierExcel.xlsx'</span>,
+    Encoding =><span class="texte">'base64'</span>,
+);
+
+Exemple pour fichier son :
+<span class="variable">$msg</span>->attach(
+    Type     =><span class="texte">'son/mp3'</span>,
+    Path     =><span class="texte">'My_Pictures\rire fantomas.mp3'</span>,
+    Filename =><span class="texte">'rire fantomas.mp3'</span>,
+    Encoding =><span class="texte">'base64'</span>,
+);
+
+<p style="float: right;"><span class="haut_de_page"><a href="#Haut de page">Haut de page</a></span></p></br>
+</font></pre>
+</body>
+
+</html>
